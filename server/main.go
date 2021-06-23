@@ -22,10 +22,10 @@ func main() {
 	maxHeaderBytes := settings.ServerSettings.MaxHeaderBytes
 
 	server := &http.Server{
-		Addr: address,
-		Handler: router,
-		ReadTimeout: readTimeout,
-		WriteTimeout: writeTimeout,
+		Addr:           address,
+		Handler:        router,
+		ReadTimeout:    readTimeout,
+		WriteTimeout:   writeTimeout,
 		MaxHeaderBytes: maxHeaderBytes,
 	}
 
@@ -55,7 +55,7 @@ func main() {
 	}
 
 	<-ctx.Done()
-		log.Println("Timeout of 5 seconds")
+	log.Println("Timeout of 5 seconds")
 
 	log.Println("Server exiting")
 }
