@@ -1,0 +1,30 @@
+include: all_lint_rules.yaml
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/i18n.dart"
+    - "**/*.config.dart"
+    - "**/*.gr.dart"
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
+  errors:
+    included_file_warning: ignore
+    top_level_function_literal_block: ignore
+
+linter:
+  rules:
+    prefer_double_quotes: false
+    always_specify_types: false
+    unnecessary_final: false
+    prefer_expression_function_bodies: false
+    always_put_required_named_parameters_first: false
+    avoid_as: false
+    flutter_style_todos: false
+    lines_longer_than_80_chars: false
+    avoid_annotating_with_dynamic: false
+    public_member_api_docs: true
+    package_api_docs: true
+    use_key_in_widget_constructors: false
+    comment_references: true
