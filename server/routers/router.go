@@ -11,11 +11,7 @@ func InitRouter() *gin.Engine {
 	r.Use(gin.Recovery())
 
 	r.GET("/", func(ctx *gin.Context) {
-		ctx.JSON(
-			http.StatusOK,
-			gin.H{
-				"message":"Hello world",
-			})
+		ctx.String(http.StatusOK, "Hello World")
 	})
 
 	return r
