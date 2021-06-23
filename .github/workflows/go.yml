@@ -15,10 +15,13 @@ jobs:
         go-version: 1.16
             
     - name: Run golangci-lint
-      uses: golangci/golangci-lint-action@v2.5.2
+      working-directory: ./server
+      run: golangci/golangci-lint-action@v2.5.2
 
     - name: Build
+      working-directory: ./server
       run: go build -v ./...
 
     - name: Test
+      working-directory: ./server
       run: go test -v ./...

@@ -9,13 +9,11 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
-      title:'Artiver',
-      localizationsDelegates: const[
+      title: 'Artiver',
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate
       ],
@@ -27,4 +25,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
