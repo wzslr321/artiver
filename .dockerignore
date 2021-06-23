@@ -1,0 +1,8 @@
+.dockerignore
+.git
+.idea/
+.gitignore
+all_lint_rules.yaml
+server/.idea
+app/.idea
+analysis_options.yaml
