@@ -10,6 +10,7 @@ All of things pointed out below are descriped in the same order on the bottom of
 * Reporting an issue
 * Discussing the current state of the code
 * Submitting a fix
+* Translations   
 * Proposing new features
 * Becoming a maintainer
 
@@ -59,6 +60,20 @@ don't feel comfortable enough with that, consider asking for help on our Discord
 <a href="https://discord.gg/CSkuazRqKG"> Discord</a>, to have a satisfaction of creating a whole PR by yourself!
 3. Ensure to describe your pull request.
 
+> Pull requests trigger checks, that analyze the code. 
+
+Back-end checks: 
+*  Run golangci-lint
+*  go build -v ./...
+*  go test -v ./...
+
+Front-end checks: 
+* flutter format --set-exit-if-changed lib
+* flutter analyze lib
+* flutter test --no-pub --coverage --test-randomize-ordering-seed random
+
+Every pull request have to successfully pass all checks before getting merged. 
+
 ---
 
 <br>
@@ -91,6 +106,35 @@ Otherwise, before making a pull request, report an issue and describe it there.
 Example of fix's PR title: `fix(#63): implement a method to yield initial value to the state.`
 
 <br>
+
+<h2 align="center"> Translations </h2>
+
+You can help to translate the project, even if you don't have any programming knowledge. 
+All texts used in this project are in `.arb` files located in `/app/lib/l10n/arb`.
+To fill a translation gaps in already existing translation file, just edit it.
+For example: If you want to add spanish translation, edit the `app_es.arb` file.
+If you want to create a translation in new language, simply create a new file in `arb` directory,
+with following name: `app_<country_shortcut>.arb`.
+
+English is a primary language of this project, thus all texts that need translation, are 
+located in `app_en.arb` file. 
+
+<b> Translation example: </b>
+
+```bash
+/// app_en.arb
+{
+    "helloWorld": "Hello World!",
+    "@helloWorld": {
+      "description": "The conventional newborn programmer greeting"
+    }
+}
+
+/// app_pl.arb
+{
+    "helloWorld": "Witaj świecie!"
+}
+```
 
 <h2 align="center"> Proposing a new features </h2>
 

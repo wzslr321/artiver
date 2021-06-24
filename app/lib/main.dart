@@ -1,7 +1,7 @@
-import 'package:artiver/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'home/home_page.dart';
 import 'l10n/l10n.dart';
 
 void main() {
