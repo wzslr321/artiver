@@ -1,4 +1,3 @@
-import 'package:artiver/domain/connection/connection_facade_interface.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -15,6 +14,7 @@ void configureInjection(String env) {
   $initGetIt(s1, environment: env);
 }
 
+/// Function that inits injection when App starts.
 Future<void> init() async {
   s1.registerLazySingleton(() => InternetConnectionChecker());
 }
