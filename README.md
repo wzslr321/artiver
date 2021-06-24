@@ -45,10 +45,10 @@ everything in one application! Sounds cool, right?
 <br>  
   
 ## Contributions
-ArTiver is open to contributions, but please first read [CONTRIBUTION.md]("https://github.com/wzslr321/artiver/blob/main/CONTRIBUTION.md") to get
+  ArTiver is open to contributions, but please first read <a href="https://github.com/wzslr321/artiver/blob/main/CONTRIBUTION.md"> CONTRIBUTION.md </a> to get
 a general overview on how to contribute.
   
 <br>  
   
 ## Code of Conduct
-  Please read [CODE_OF_CONDUCT.md]("https://github.com/wzslr321/artiver/blob/main/CODE_OF_CONDUCT.md") for details on our code of conduct.
+  Please read <a href="https://github.com/wzslr321/artiver/blob/main/CODE_OF_CONDUCT.md"> CODE_OF_CONDUCT.md </a> for details on our code of conduct.
