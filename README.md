@@ -17,8 +17,22 @@
   
   <h2 align="center"> What is ArTiver? </h2>
 
-At first I'd like to say, that I am ready to change its name - I know it is not the best one.
-  
+It is an idea that came to my mind, when I was watching a TikTok during a dinner. I realised that
+I could spend this time a lot better. There is uncountable amount of amazing articles about 
+programming that surely help with <b> self-improvement. </b> Although, nowadays it is hard to
+find an article that will make us want to read it, instead of delivering a dose of dopamine by 
+watching Youtube, Tiktok or browsing social media. 
+
+<b> ArTiver </b> will help us with this. This application will give us a possibility,
+to create a profile with our interest description and it will deliver best articles focused around them,
+from <b> all over the web! </b>
+Not only the application will have a possibility to provide relatively best articles, but so do we!
+
+Share your opinion, up/down vote articles, write a review or even write your own article -
+everything in one application! Sounds cool, right?
+
+<h3> From developers, for developers! </h3>
+
 <br>  
   
 ## Structure

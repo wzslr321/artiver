@@ -11,6 +11,12 @@
 If your commits add or change any functionality, please consider writing tests for it or 
 ask somebody to help you with that. 
 
+Before making a PR, please run following commands:
+* flutter format  lib
+* flutter analyze lib
+* flutter test --no-pub --test-randomize-ordering-seed random
+
+According to outputs of those commands, make changes if needed, to satisfy github checks.
 
 ---
 
