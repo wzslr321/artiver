@@ -8,5 +8,5 @@ class ConnectionEvent with _$ConnectionEvent {
   /// Ensures that user's network connection state is known from very beginning,
   /// since this function is invoked while creating bloc in AppWidget.
   const factory ConnectionEvent.connectionCheckRequested() =
-  ConnectionCheckRequested;
+      ConnectionCheckRequested;
 }

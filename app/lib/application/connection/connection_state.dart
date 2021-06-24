@@ -30,5 +30,5 @@ class ConnectionState with _$ConnectionState {
   /// whether you can reliably make a network connection. Protection against
   /// timeouts and errors are always needed.
   const factory ConnectionState.connectedWithNoNetworkAccess() =
-  ConnectedWithNoNetworkAccess;
+      ConnectedWithNoNetworkAccess;
 }

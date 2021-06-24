@@ -47,16 +47,16 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
   StreamSubscription<ConnectivityResult> monitorConnection() {
     return networkSubscription =
         Connectivity().onConnectivityChanged.listen((event) async {
-          if (event == ConnectivityResult.none) {
-            emit(const ConnectionState.disconnected());
-          } else {
-            if (await _connectionInfo.hasConnection) {
-              emit(const ConnectionState.connected());
-            } else {
-              emit(const ConnectionState.connectedWithNoNetworkAccess());
-            }
-          }
-        });
+      if (event == ConnectivityResult.none) {
+        emit(const ConnectionState.disconnected());
+      } else {
+        if (await _connectionInfo.hasConnection) {
+          emit(const ConnectionState.connected());
+        } else {
+          emit(const ConnectionState.connectedWithNoNetworkAccess());
+        }
+      }
+    });
   }
 
   /// [Connectivity]'s network subscription which listens on connectivity changes
@@ -73,8 +73,8 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
       });
 
       yield connection.fold(
-            (left) => const ConnectionState.disconnected(),
-            (right) => const ConnectionState.connectedOnInitial(),
+        (left) => const ConnectionState.disconnected(),
+        (right) => const ConnectionState.connectedOnInitial(),
       );
     });
   }
