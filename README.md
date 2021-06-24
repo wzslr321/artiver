@@ -32,6 +32,10 @@ Share your opinion, up/down vote articles, write a review or even write your own
 everything in one application! Sounds cool, right?
 
 <h3> From developers, for developers! </h3>
+  
+Ultimately, the project is going to be available on all platforms, taking advantage of the amazing capabilities of the flutter!
+  
+Real cross-platform experience for developers!
 
 <br>  
   
