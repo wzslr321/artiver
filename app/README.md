@@ -1,16 +1,25 @@
-# app
+<h4 align="center"> 
+    In this project we use <b> Domain Driven Design. </b>
+    If you don't know DDD principles, I strongly recommend reading about it,
+    because it is knowledge that surely won't be wasted in your career. 
+</h4>
 
-A new Flutter project.
+> To learn DDD with Flutter I recommend <a href ="https://www.youtube.com/watch?v=RMiN59x3uH0&list=PLB6lc7nQ1n4iS5p-IezFFgqP6YvAJy84"> this </a> awesome tutorial series from <b> Reso Coder </b> 
 
-## Getting Started
+#
 
-This project is a starting point for a Flutter application.
+If your commits add or change any functionality, please consider writing tests for it or 
+ask somebody to help you with that. 
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+---
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<h3 align="center"> 
+    <i> 
+        In case you don't  you don't feel comfortable enough with some concept, or you are not sure how to implement something, 
+        please ask for help on our <a href="https://discord.gg/WtyXXRqvSx"> Discord. </a> We are always willing and ready to help you with everything! 
+    </i>
+</h3>
+
+---
+

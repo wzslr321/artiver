@@ -49,7 +49,9 @@ don't feel comfortable enough with that, consider asking for help on our Discord
 
 <h2 align="center"> Quickstart Local Backend Development </h2>
 
-<!> Needs implementation - containerization to consider - Kubernetes vs Docker. <!> 
+Do this no matter what you are working on. Server has to be running to properly communicate 
+with front end. To run server you need docker and docker-compose installed. 
+With docker-compose properly configured, you just have to run `docker compose up` in the root directory of this project.
 
 <br>
 
