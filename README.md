@@ -49,7 +49,7 @@ Real cross-platform experience for developers!
 <br>  
   
 ## Contributions
-  ArTiver is open to contributions, but please first read <a href="https://github.com/wzslr321/artiver/blob/main/CONTRIBUTION.md"> CONTRIBUTION.md </a> to get
+  ArTiver is open to contributions, but please first read <a href="https://github.com/wzslr321/artiver/blob/main/CONTRIBUTING.md"> CONTRIBUTING.md </a> to get
 a general overview on how to contribute.
   
 <br>  
