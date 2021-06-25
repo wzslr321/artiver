@@ -16,9 +16,13 @@ import '../../domain/connection/connection_failure.dart';
 /// Contains overridden method to check if user is connected to the network.
 @LazySingleton(as: ConnectionFacadeInterface)
 class ConnectionFacade implements ConnectionFacadeInterface {
+  ConnectionFacade(this._connectivity);
+
+  final Connectivity _connectivity;
+
   @override
   Future<Either<ConnectionFailure, Unit>> checkIfConnectionExists() async {
-    final connectivityResult = await Connectivity().checkConnectivity();
+    final connectivityResult = await _connectivity.checkConnectivity();
 
     if (connectivityResult == ConnectivityResult.none) {
       return left(const ConnectionFailure.noConnectionFound());
