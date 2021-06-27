@@ -29,6 +29,10 @@ All of pull requests are going to be reviewed and if it goes sucessfully, these 
 
 <br>
 
+#### Before implementing your own thing of choice, check out our <a href="https://github.com/wzslr321/artiver/projects/1"> TodoList </a> to see if there is something that suits you! 
+
+<br> 
+
 <h2 align="center"> Quickstart Local Frontend Development </h2>
 
 Do this if you only want to do Flutter related stuff.
