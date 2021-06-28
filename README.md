@@ -48,6 +48,10 @@ Real cross-platform experience for developers!
 
 <br>  
   
+## Visualization
+  Check out <a href="https://github.com/wzslr321/artiver/blob/visualization/VISUALIZATION.md"> VISUALIZATION.md </a> too see more complex
+overview of a project.
+  
 ## Contributions
   ArTiver is open to contributions, but please first read <a href="https://github.com/wzslr321/artiver/blob/main/CONTRIBUTING.md"> CONTRIBUTING.md </a> to get
 a general overview on how to contribute.
