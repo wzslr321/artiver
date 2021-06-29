@@ -16,6 +16,8 @@ import '../../domain/connection/connection_failure.dart';
 /// Contains overridden method to check if user is connected to the network.
 @LazySingleton(as: ConnectionFacadeInterface)
 class ConnectionFacade implements ConnectionFacadeInterface {
+  /// Requires non-nullable parameter type [Connectivity]
+  /// to use along with dependency injection at make it testable.
   ConnectionFacade(this._connectivity);
 
   final Connectivity _connectivity;
