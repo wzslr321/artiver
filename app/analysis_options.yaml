@@ -6,6 +6,7 @@ analyzer:
     - "**/i18n.dart"
     - "**/*.config.dart"
     - "**/*.gr.dart"
+    - "**/*.mocks.dart"
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false

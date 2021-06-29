@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 
-import 'connection_failure.dart';
+import './connection_failure.dart';
 
 /// Connection class with connection check related method.
 ///
