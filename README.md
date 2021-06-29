@@ -49,7 +49,7 @@ Real cross-platform experience for developers!
 <br>  
   
 ## Visualization
-  Check out <a href="https://github.com/wzslr321/artiver/blob/visualization/VISUALIZATION.md"> VISUALIZATION.md </a> too see more complex
+  Check out <a href="https://github.com/wzslr321/artiver/blob/main/VISUALIZATION.md"> VISUALIZATION.md </a> too see more complex
 overview of a project.
   
 ## Contributions
