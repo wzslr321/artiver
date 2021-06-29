@@ -21,11 +21,10 @@ void main() {
     connection = ConnectionFacade(mockConnectivity);
   });
 
-
   group('isConnectedToTheNetwork', () {
-    test('Should return ConnectionFailure if running without internet connection.',
+    test(
+        'Should return ConnectionFailure if running without internet connection.',
         () async {
-
       final _connectivityResultNone = Future.value(ConnectivityResult.none);
 
       when(mockConnectivity.checkConnectivity()).thenAnswer(
@@ -45,13 +44,13 @@ void main() {
       final _connectivityResultWifi = Future.value(ConnectivityResult.wifi);
 
       when(mockConnectivity.checkConnectivity()).thenAnswer(
-            (_) => _connectivityResultWifi,
+        (_) => _connectivityResultWifi,
       );
 
       final _result = await connection.checkIfConnectionExists();
       final result = _result.fold(
-            (l) => const ConnectionFailure.noConnectionFound(),
-            (r) => Unit,
+        (l) => const ConnectionFailure.noConnectionFound(),
+        (r) => Unit,
       );
 
       expect(result, Unit);
@@ -61,13 +60,13 @@ void main() {
       final _connectivityResultMobile = Future.value(ConnectivityResult.mobile);
 
       when(mockConnectivity.checkConnectivity()).thenAnswer(
-            (_) => _connectivityResultMobile,
+        (_) => _connectivityResultMobile,
       );
 
       final _result = await connection.checkIfConnectionExists();
       final result = _result.fold(
-            (l) => const ConnectionFailure.noConnectionFound(),
-            (r) => Unit,
+        (l) => const ConnectionFailure.noConnectionFound(),
+        (r) => Unit,
       );
 
       expect(result, Unit);

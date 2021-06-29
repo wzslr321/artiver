@@ -18,16 +18,16 @@ void main() {
 
   group('isConnectedToValidNetwork', () {
     test('Should forward the call to InternetConnectionChecker.hasConnection',
-            () async {
-          final hasConnectionFuture = Future.value(true);
+        () async {
+      final hasConnectionFuture = Future.value(true);
 
-          when(mockInternetConnectionChecker.hasConnection)
-              .thenAnswer((_) => hasConnectionFuture);
+      when(mockInternetConnectionChecker.hasConnection)
+          .thenAnswer((_) => hasConnectionFuture);
 
-          final result = connectionInfo.hasConnection;
+      final result = connectionInfo.hasConnection;
 
-          verify(mockInternetConnectionChecker.hasConnection);
-          expect(result, hasConnectionFuture);
-        });
+      verify(mockInternetConnectionChecker.hasConnection);
+      expect(result, hasConnectionFuture);
+    });
   });
 }
