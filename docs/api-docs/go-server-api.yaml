@@ -1,0 +1,110 @@
+openapi: 3.0.0
+info:
+  title: Tiver
+  version: "0.0.1"
+  description: Tiver Server Api
+  contact:
+    name: Admin
+    url: https://github.com/wzslr321/artiver
+servers:
+  - url: 'https://localhost'
+    description: 'Development Server'
+  
+paths:
+  /:
+    get:
+      tags:
+        - Info
+      summary: Get Info
+      description: Get info about this api.
+      operationId: GetHelp
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers:
+            Host:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 'localhost:8080'
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 'Tue, 18 Jun 2019 22:39:02 +0000'
+            Access-Control-Allow-Origin:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: '*'
+      deprecated: false    
+  /articles/search:
+    get:
+      tags:
+        - Articles
+      parameters:
+        - name: tags
+          in: query
+          description: tags of articles for filtering search results
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Returns array of found articles'
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  articles:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/article'
+              
+components:
+  schemas:
+    user:
+      title: user
+      type: object
+      properties:
+        user_name:
+          type: string
+        email:  
+          type: string
+    article:
+      title: article
+      type: object
+      properties:
+        reference_url:
+          type: string
+        likes:
+          type: integer
+        dislikes:
+          type: integer
+        tags:
+          type: array
+          items:
+            type: string
+    tags:
+      type: array
+      items:
+        type: string
+        
+  securitySchemes:
+    Authorization:
+      name: Authorization
+      type: apiKey
+      in: header
+      description: JWT Token for Authorization
+tags:
+  - name: Info
+    description: Get information about API.
+  - name: Articles
+    description: Articles get and search.
+  - name: User
+    description: User preferences
