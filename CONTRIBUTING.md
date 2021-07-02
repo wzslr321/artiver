@@ -154,3 +154,12 @@ its title. Make sure to be as descriptive as you can!
 To become a maintainer, you just have to be an active repository contributor or helper. We do appreciate every kind of help, so if you don't have enough time to write
 a code, it would be also awesome if you can help other contributors understand particular code or concepts. Code reviews are also extremely important part, thus code reviewers
 are always welcome. 
+
+<h2 align="center"> Version issues </h2>
+
+If you encounter any version issues while configuring a project on your local machine,
+check out <a href="https://github.com/wzslr321/artiver/blob/main/VERSIONS.md"> VERSIONS>md </a>,
+to check if yours dependencies versions are up to date. 
+
+In case you spot that project's version dependency isn't updated and new version 
+includes breaking changes, please submit it as an issue <a href="https://github.com/wzslr321/ativer/issues/new"> here</a> 
