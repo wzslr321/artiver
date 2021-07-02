@@ -9,4 +9,10 @@ services:
       - '8000:8000'
     volumes:
       - ./server:/server
-
+  docs:
+    build:
+      context: server/docs
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./server/docs:/docs
