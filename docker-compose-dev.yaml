@@ -9,10 +9,20 @@ services:
       - '8000:8000'
     volumes:
       - ./server:/server
-  docs:
+  server_docs:
     build:
       context: server/docs
     ports:
       - '8080:8080'
+  app_docs:
+    build:
+      context: app/docs
+    ports:
+      - '8081:8081'
     volumes:
-      - ./server/docs:/docs
+      - ./app/doc/api:/docs/app
+    command: >
+      sh -c "pub global activate dartdoc
+      && pub global activate dhttpd
+      && dartdoc
+      && dhttpd --path /doc/api --port 8081"
