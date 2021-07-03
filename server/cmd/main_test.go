@@ -2,14 +2,14 @@ package main
 
 import (
 	"github.com/stretchr/testify/assert"
-	"github.com/wzslr321/artiver/routers"
+	routers2 "github.com/wzslr321/artiver/api/routers"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 )
 
 func TestPingRoute(t *testing.T) {
-	router := routers.InitRouter()
+	router := routers2.InitRouter()
 
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/", nil)

@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/rs/cors"
-	"github.com/wzslr321/artiver/routers"
+	routers2 "github.com/wzslr321/artiver/api/routers"
 	"github.com/wzslr321/artiver/settings"
 	"log"
 	"net/http"
@@ -16,7 +16,7 @@ import (
 
 func main() {
 	address := fmt.Sprintf(":%s", settings.ServerSettings.Address)
-	router := cors.Default().Handler(routers.InitRouter())
+	router := cors.Default().Handler(routers2.InitRouter())
 	readTimeout := settings.ServerSettings.ReadTimeout
 	writeTimeout := settings.ServerSettings.WriteTimeout
 	maxHeaderBytes := settings.ServerSettings.MaxHeaderBytes
