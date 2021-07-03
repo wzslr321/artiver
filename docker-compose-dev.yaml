@@ -30,3 +30,4 @@ services:
       - "8090:8080"
     volumes:
       - ./docs/swagger-api-docs/swagger-api-docs.yaml:/swagger.json
+
