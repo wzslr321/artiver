@@ -1,6 +1,6 @@
 FROM golang:alpine
 
-WORKDIR /docs
+WORKDIR /docs/server
 
 RUN go get golang.org/x/tools/cmd/godoc
 
