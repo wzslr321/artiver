@@ -1,3 +1,3 @@
 FROM google/dart
 
-WORKDIR /docs/server
+WORKDIR /docs/app
