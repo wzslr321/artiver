@@ -16,7 +16,7 @@ services:
       - '8080:8080'
   app_docs:
     build:
-      context: app/docs
+      context: app
     ports:
       - '8081:8081'
     volumes:
@@ -25,4 +25,4 @@ services:
       sh -c "pub global activate dartdoc
       && pub global activate dhttpd
       && dartdoc
-      && dhttpd --path /doc/api --port 8081"
+      && dhttpd --path doc/api --port 8081"
