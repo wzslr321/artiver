@@ -1,9 +1,9 @@
-FROM google/dart
+FROM cirrusci/flutter AS build
 
-WORKDIR /docs/app
+WORKDIR /build
 
-RUN pub global activate dartdoc \
-    && pub global activate dhttpd
+RUN flutter pub global activate dartdoc \
+    && flutter pub global activate dhttpd
 
 COPY . .
 
