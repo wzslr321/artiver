@@ -67,7 +67,10 @@ It starts also API and godocs, respectively on ports 8080 and 8090.
 
 Before working on API, make sure to checkout best REST API practises, <a href="https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/"> here </a>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 638efce (.md files clarifications, docker configuration cleanup)
 <br>
 
 <h2 align="center"> Pull Requests </h2>

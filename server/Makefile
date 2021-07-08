@@ -22,7 +22,7 @@ build-api:
 	go build -tags $(LIBRARY_ENV) -o ./bin/api api/main.go
 
 build-cmd:
-	go build -tags $(LIBRARY_ENV) -o ./bin/search cmd/main.go
+	go build -tags $(LIBRARY_ENV) -o ./bin/cmd cmd/main.go
 
 linux-binaries:
 	CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -tags "$(LIBRARY_ENV) netgo" -installsuffix netgo -o $(BIN_DIR)/api api/main.go
