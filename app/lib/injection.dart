@@ -17,6 +17,7 @@ void configureInjection(String env) {
 
 /// Function that inits injection when App starts.
 Future<void> init() async {
-  s1.registerLazySingleton(() => InternetConnectionChecker());
-  s1.registerLazySingleton(() => Connectivity());
+  s1
+    ..registerLazySingleton(() => InternetConnectionChecker())
+    ..registerLazySingleton(() => Connectivity());
 }
