@@ -4,6 +4,7 @@ import 'package:flutter/material.dart' hide ConnectionState;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/connection/connection_bloc.dart';
+import '../../../l10n/l10n.dart';
 import 'simple_snackbar.dart';
 
 /// A top level widget that listens connection state
@@ -21,11 +22,11 @@ class ConnectionStateListenerWidget extends StatelessWidget {
       listener: (context, state) {
         state.map(
           connected: (_) => ScaffoldMessenger.of(context)
-              .showSnackBar(SimpleSnackBar('Connected!')),
+              .showSnackBar(SimpleSnackBar(context.l10n.connected)),
           connectedOnInitial: (_) {},
           connectedWithNoNetworkAccess: (_) {},
           disconnected: (_) => ScaffoldMessenger.of(context)
-              .showSnackBar(SimpleSnackBar('Disconnected!')),
+              .showSnackBar(SimpleSnackBar(context.l10n.disconnected)),
           initial: (_) {},
         );
       },
