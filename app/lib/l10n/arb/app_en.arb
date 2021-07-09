@@ -2,5 +2,13 @@
     "helloWorld": "Hello World!",
     "@helloWorld": {
       "description": "The conventional newborn programmer greeting"
+    },
+    "connected": "Connected!",
+    "@connected": {
+      "description": "Notification message when connected"
+    },
+    "disconnected": "Disconnected!",
+    "@disconnected": {
+      "description": "Notification message when disconnected"
     }
 }
