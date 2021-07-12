@@ -21,6 +21,9 @@ services:
       - '8081:8081'
     volumes:
       - ./app/doc/api:/docs/app
+    command: >
+      sh -c "dartdoc"
+      && dhttpd --path doc/api --port 8081
   swagger-ui:
     image: docker.io/swaggerapi/swagger-ui
     environment:
