@@ -1,6 +1,7 @@
 FROM cirrusci/flutter
 
-<<<<<<< HEAD
+FROM cirrusci/flutter
+
 WORKDIR /app
 
 RUN flutter pub global activate dartdoc \
@@ -14,12 +15,3 @@ RUN flutter pub get \
 COPY . .
 
 CMD ["pub", "global", "run", "dhttpd","--path", "app/doc/api", "--port", "8081"]
-=======
-WORKDIR /docs/app
-
-RUN pub global activate dartdoc \
-    && pub global activate dhttpd \
-    && dartdoc \
-
-CMD ["dhttpd", "--path", "doc/api", "--port", "8081"]
->>>>>>> 638efce (.md files clarifications, docker configuration cleanup)
