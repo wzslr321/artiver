@@ -1,7 +1,5 @@
 FROM cirrusci/flutter
 
-FROM cirrusci/flutter
-
 WORKDIR /app
 
 RUN flutter pub global activate dartdoc \
