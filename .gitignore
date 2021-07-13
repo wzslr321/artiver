@@ -1,8 +1,5 @@
 .idea/
-<<<<<<< HEAD
 doc/
 server/bin/
 app/doc/api
-=======
-
->>>>>>> f08914f (dartdoc path issue)
+tmp/
