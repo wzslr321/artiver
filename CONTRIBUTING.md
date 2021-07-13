@@ -40,6 +40,12 @@ Do this if you only want to do Flutter related stuff.
 * Navigate to the `/app`
 * Run `flutter pub get`
 * Run `flutter run`
+  
+* Install Docker and docker-compose.
+
+With docker-compose properly configured, you just have to run `docker compose -f docker-compose-dev.yaml up` in the root directory of this project.
+
+It starts also API and dart docs, respectively on ports 8080 and 8081.
 
 <i> Now you are ready to start coding! </i>
 
@@ -53,9 +59,13 @@ don't feel comfortable enough with that, consider asking for help on our Discord
 
 <h2 align="center"> Quickstart Local Backend Development </h2>
 
-Do this no matter what you are working on. Server has to be running to properly communicate 
-with front end. To run server you need docker and docker-compose installed. 
+* Install Docker and docker-compose.
+
 With docker-compose properly configured, you just have to run `docker compose -f docker-compose-dev.yaml up` in the root directory of this project.
+
+It starts also API and godocs, respectively on ports 8080 and 8090. 
+
+Before working on API, make sure to checkout best REST API practises, <a href="https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/"> here </a>
 
 <br>
 
@@ -158,7 +168,7 @@ are always welcome.
 <h2 align="center"> Version issues </h2>
 
 If you encounter any version issues while configuring a project on your local machine,
-check out <a href="https://github.com/wzslr321/artiver/blob/main/VERSIONS.md"> VERSIONS>md </a>,
+check out <a href="https://github.com/wzslr321/artiver/blob/main/VERSIONS.md"> VERSIONS.md </a>,
 to check if yours dependencies versions are up to date. 
 
 In case you spot that project's version dependency isn't updated and new version 

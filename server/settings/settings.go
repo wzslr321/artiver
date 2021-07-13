@@ -1,6 +1,7 @@
 package settings
 
 import (
+	"github.com/wzslr321/artiver/conf"
 	"gopkg.in/ini.v1"
 	"log"
 	"time"
@@ -18,9 +19,11 @@ var ServerSettings = &Server{}
 
 var cfg *ini.File
 
+
 func InitSettings() {
 	var err error
-	cfg, err = ini.Load("conf/app.ini")
+
+	cfg, err = ini.Load(conf.GetRootDir() + "/conf/app.ini")
 	if err != nil {
 		log.Fatalf("settigs setup, failed to parse 'conf/app.ini' : %v", err)
 	}

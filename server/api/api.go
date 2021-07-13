@@ -1,14 +1,15 @@
-package main
+package api
 
 import (
 	"context"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
+	"log"
 	"time"
 )
 
-func main() {
+func InitMongo() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 
 	defer cancel()
@@ -20,4 +21,6 @@ func main() {
 	}()
 
 	err = client.Ping(ctx, readpref.Primary())
+
+	log.Println("Successfully connected to the database!")
 }

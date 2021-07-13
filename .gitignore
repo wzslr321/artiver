@@ -1,2 +1,5 @@
 .idea/
 doc/
+server/bin/
+app/doc/api
+tmp/

@@ -17,46 +17,32 @@ paths:
       tags:
         - Users
       summary: Get One User
-      description: 'TODO: Add Description'
+      description: 'Get user profile information'
       operationId: GetOneUser
       responses:
         '200':
-          description: ''
-          headers: {}
-      deprecated: false
-    parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-    post:
-      tags:
-        - Users
-      summary: Update User
-      description: Update a user.
-      operationId: UpdateUser
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateUserRequest'
-            example:
-              name: Jhon R
-              email: ram@hotmail.com
-        required: true
-      responses:
-        '200':
-          description: ''
-          headers: {}
+          description: 'Successfully found a user with specified uid'
+          headers: {} # <!> TODO <!>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_meta'
+              example:
+                name: 'Steve'
+                photoURL: 'some_url.jpg'
+        '404':
+          description: 'Could not find a user with specified uid'
+          content:
+            application/json:
+              example:
+                message: 'Could not find a user with specified uid'
       deprecated: false
   /users:
     get:
       tags:
         - Users
       summary: Get All Users
-      description: 'TODO: Add Description'
+      description: 'Get an array of all users'
       operationId: GetAllUsers
       responses:
         '200':
@@ -64,7 +50,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/user_meta'
+                $ref: '#/components/schemas/all_users_meta'
+              example:
+                users: [
+                  {
+                    name: 'Steve',
+                    photoURL: 'some_url.jpg'
+                  },
+                  {
+                    name: 'Mark',
+                    photoURL: 'some_different_url.jpg'
+                  }
+                ]
+        '400':
+          description: 'Bad request - client-side input fails validation'
+          content:
+            application/json:
+              example:
+                message: 'Could not fetch users'
       deprecated: false
     post:
       tags:
@@ -86,8 +89,14 @@ paths:
         required: true
       responses:
         '200':
-          description: ''
+          description: 'Successfully created new user'
           headers: {}
+        '400':
+          description: 'Bad request - client-side input fails validation'
+          content:
+            application/json:
+              example:
+                message: 'Could not create a user due to incorrect input'
       deprecated: false
     parameters: []
   /auth/email:
@@ -176,7 +185,7 @@ paths:
         required: true
       responses:
         '200':
-          description: ''
+          description: 'Successfully authorized user and accessed profile information'
           content:
             application/json:
               schema:
@@ -187,16 +196,55 @@ paths:
                 message:
                   Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsImVtYWlsIjoibUBiLmNvbS5hciIsIm5hbWUiOiJNTkIiLCJpYXQiOjE1NTg1NTMwNTIsImV4cCI6MTU1OTE1Nzg1Mn0.OQyICWlGW0oSUB-ANrYL2OJTdC2v0OQQO3RQQ3W_KLo
         '400':
-          description: Bad Request
+          description: Bad request - client-side input fails validation.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/LoginFailed'
               example:
-                message: 'Login failed: Email or password incorrect.'
+                message: 'Login failed - Google authorization did not finish successfully.'
                 class: UserException
                 status: error
-                code: 400      
+                code: 400
+  /auth/facebook:
+    post:
+      tags:
+        - Auth
+      summary: Facebook Sign In
+      description: 'Endpoint that uses Facebook SDK, to sign in a user and access his Facebook account information.'
+      parameters: []
+      requestBody:
+        description: 'Auth token provided by frontend'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/token'
+            example:
+              token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyMzQ1Njc4OTAsImlzcyI6Imh0dHBzOi8vYWNjb3VudHMuZ29vZ2xlLmNvbSIsImF1ZCI6IjEyMy1hYmMuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJpYXQiOjIzMzM2NjQwMCwiZXhwIjoyMzMzNzAwMDAsIm5hbWUiOiJKb2huIERvZSIsImdpdmVuX25hbWUiOiJKb2huIiwiZmFtaWx5X25hbWUiOiJEb2UiLCJlbWFpbCI6Impkb2VAZ21haWwuY29tIiwibG9jYWxlIjoiZW5fVVMifQ.mFhIakeMiuA6Bz-IHUi6-IFa9fr58DmbHMzOCz4t9dI
+        required: true
+      responses:
+        '200':
+          description: 'Successfully authorized user and accessed profile information'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/token'
+              example:
+                code: 200
+                status: success
+                message:
+                  Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsImVtYWlsIjoibUBiLmNvbS5hciIsIm5hbWUiOiJNTkIiLCJpYXQiOjE1NTg1NTMwNTIsImV4cCI6MTU1OTE1Nzg1Mn0.OQyICWlGW0oSUB-ANrYL2OJTdC2v0OQQO3RQQ3W_KLo
+        '400':
+          description: Bad request - client-side input fails validation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginFailed'
+              example:
+                message: 'Login failed - Facebook authorization did not finish successfully.'
+                class: UserException
+                status: error
+                code: 400
   /:
     get:
       tags:
@@ -242,20 +290,12 @@ components:
       properties:
         token:
           type: string
-    article_meta:
-      title: article_meta_data
-      type: object
+    all_users_meta:
+      title: All Users Meta Data
+      type: array
       properties:
-        reference_url:
-          type: string
-        likes:
-          type: integer
-        dislikes:
-          type: integer
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/tags'
+        schema:
+          $ref: '#/components/schemas/user_meta'
     UpdateUserRequest:
       title: UpdateUserRequest
       required:

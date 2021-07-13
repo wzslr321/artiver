@@ -22,8 +22,8 @@ jobs:
 
     - name: Build
       working-directory: ./server
-      run: go build -v ./...
+      run: make
 
     - name: Test
       working-directory: ./server
-      run: go test -v ./...
+      run: make test
