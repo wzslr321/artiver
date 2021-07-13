@@ -15,7 +15,7 @@ clean:
 
 dependencies:
 	go mod download
-
+  
 build: dependencies build-cmd
 
 build-cmd:
