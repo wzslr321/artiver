@@ -5,6 +5,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
+	"log"
 	"time"
 )
 
@@ -20,4 +21,6 @@ func main() {
 	}()
 
 	err = client.Ping(ctx, readpref.Primary())
+
+	log.Println("Successfully connected to the database!")
 }
