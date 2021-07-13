@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/rs/cors"
+	"github.com/wzslr321/artiver/api"
 	"github.com/wzslr321/artiver/api/routers"
 	"github.com/wzslr321/artiver/settings"
 	"log"
@@ -14,7 +15,13 @@ import (
 	"time"
 )
 
+func init() {
+	settings.InitSettings()
+	api.InitMongo()
+}
+
 func main() {
+
 	address := fmt.Sprintf(":%s", settings.ServerSettings.Address)
 	router := cors.Default().Handler(routers.InitRouter())
 	readTimeout := settings.ServerSettings.ReadTimeout
@@ -33,7 +40,7 @@ func main() {
 
 	err = server.ListenAndServe()
 
-	log.Printf("Server is running on port: %s", address)
+	log.Printf("Server is running on port:  %s", address)
 
 	go func() {
 		if err = server.ListenAndServe(); err != nil && err != http.ErrServerClosed {

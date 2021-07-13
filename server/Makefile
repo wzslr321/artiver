@@ -16,10 +16,7 @@ clean:
 dependencies:
 	go mod download
 
-build: dependencies build-api build-cmd
-
-build-api:
-	go build -tags $(LIBRARY_ENV) -o ./bin/api api/main.go
+build: dependencies build-cmd
 
 build-cmd:
 	go build -tags $(LIBRARY_ENV) -o ./bin/cmd cmd/main.go
