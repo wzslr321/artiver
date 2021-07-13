@@ -6,6 +6,7 @@ import '../../application/connection/connection_bloc.dart';
 import '../../injection.dart';
 import '../../l10n/l10n.dart';
 import '../router/router.gr.dart';
+import 'widgets/connection_state_listener_widget.dart';
 
 /// Main application that is on the top of widget tree,
 /// contains most essential properties and configuration.
@@ -23,6 +24,8 @@ class MyAppWidget extends StatelessWidget {
       ],
       child: MaterialApp.router(
         title: 'ArTiver',
+        builder: (context, widget) =>
+            ConnectionStateListenerWidget(child: widget!),
         routeInformationParser: _appRouter.defaultRouteParser(),
         routerDelegate: _appRouter.delegate(),
         localizationsDelegates: const [

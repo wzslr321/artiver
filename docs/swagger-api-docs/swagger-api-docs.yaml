@@ -1,0 +1,340 @@
+openapi: 3.0.0
+info:
+  title: ArTiver
+  version: "1.0.0"
+  description: ArTiver Server Api Documentation
+  contact:
+    name: Contact
+    url: https://github.com/wzslr321/artiver
+servers:
+  - description: "ArTiver Local Development Server" 
+    url: 'https://localhost:8000'
+security:
+  - AuthApiKey: []
+paths:
+  '/users/{uid}':
+    get:
+      tags:
+        - Users
+      summary: Get One User
+      description: 'TODO: Add Description'
+      operationId: GetOneUser
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        required: true
+    post:
+      tags:
+        - Users
+      summary: Update User
+      description: Update a user.
+      operationId: UpdateUser
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+            example:
+              name: Jhon R
+              email: ram@hotmail.com
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users:
+    get:
+      tags:
+        - Users
+      summary: Get All Users
+      description: 'TODO: Add Description'
+      operationId: GetAllUsers
+      responses:
+        '200':
+          description: return all users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_meta'
+      deprecated: false
+    post:
+      tags:
+        - Users
+      summary: Create User
+      description: Register a new user.
+      operationId: CreateUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+            example:
+              name: John User
+              email: super.email@host.com
+              password: OnePass1
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    parameters: []
+  /auth/email:
+    post:
+      tags:
+        - Auth
+      summary: Sign in with Email
+      description: Login and get a JWT Token Authorization Bearer to use this api.
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            example:
+              email: super.email@host.com
+              password: OnePass1
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers:
+            Host:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 'localhost:8000'
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 'Wed, 22 May 2019 19:24:12 +0000'
+            Connection:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: close
+            Access-Control-Allow-Origin:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: '*'
+            Content-Length:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 291
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/server_message'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginFailed'
+              example:
+                message: 'Login failed: Email or password incorrect.'
+                class: UserException
+                status: error
+                code: 400
+      deprecated: false
+  /auth/google:
+    post:
+      tags:
+        - Auth
+      summary: Google Sign In
+      description: Test
+      parameters: []
+      requestBody:
+        description: 'Auth token provided by frontend'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/token'
+            example:
+              token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyMzQ1Njc4OTAsImlzcyI6Imh0dHBzOi8vYWNjb3VudHMuZ29vZ2xlLmNvbSIsImF1ZCI6IjEyMy1hYmMuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJpYXQiOjIzMzM2NjQwMCwiZXhwIjoyMzMzNzAwMDAsIm5hbWUiOiJKb2huIERvZSIsImdpdmVuX25hbWUiOiJKb2huIiwiZmFtaWx5X25hbWUiOiJEb2UiLCJlbWFpbCI6Impkb2VAZ21haWwuY29tIiwibG9jYWxlIjoiZW5fVVMifQ.mFhIakeMiuA6Bz-IHUi6-IFa9fr58DmbHMzOCz4t9dI
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/token'
+              example:
+                code: 200
+                status: success
+                message:
+                  Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsImVtYWlsIjoibUBiLmNvbS5hciIsIm5hbWUiOiJNTkIiLCJpYXQiOjE1NTg1NTMwNTIsImV4cCI6MTU1OTE1Nzg1Mn0.OQyICWlGW0oSUB-ANrYL2OJTdC2v0OQQO3RQQ3W_KLo
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginFailed'
+              example:
+                message: 'Login failed: Email or password incorrect.'
+                class: UserException
+                status: error
+                code: 400      
+  /:
+    get:
+      tags:
+        - Info
+      summary: Root Endpoint
+      description: Get help about this api.
+      parameters: []
+      responses:
+        '200':
+          description: 'May return api documentation url'
+          
+          content:
+            application/json:
+              schema:
+                type: string
+              example:
+                "http://localhost:8090"
+      deprecated: false
+components:
+  schemas:
+    server_message:
+      title: Server Status Message
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    user_meta:
+      title: User Meta Data
+      type: object
+      properties:
+        name: 
+          type: string
+        photoURL: 
+          type: string
+    tags:
+      title: Article Tag
+      type: string
+    token:
+      title: token
+      type: object
+      properties:
+        token:
+          type: string
+    article_meta:
+      title: article_meta_data
+      type: object
+      properties:
+        reference_url:
+          type: string
+        likes:
+          type: integer
+        dislikes:
+          type: integer
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/tags'
+    UpdateUserRequest:
+      title: UpdateUserRequest
+      required:
+        - name
+        - email
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+      example:
+        name: Jhon R
+        email: ram@hotmail.com
+    CreateUserRequest:
+      title: CreateUserRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: John User
+        email: super.email@host.com
+        password: OnePass1
+    LoginFailed:
+      title: LoginFailed
+      required:
+        - message
+        - class
+        - status
+        - code
+      type: object
+      properties:
+        message:
+          type: string
+        class:
+          type: string
+        status:
+          type: string
+        code:
+          type: integer
+          format: int32
+      example:
+        message: 'Login failed: Email or password incorrect.'
+        class: UserException
+        status: error
+        code: 400
+    LoginRequest:
+      title: LoginRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: super.email@host.com
+        password: OnePass1
+  securitySchemes:
+    AuthApiKey:
+      name: Authorization
+      type: apiKey
+      in: header
+      description: JWT for Authentication and Authorization
+tags:
+  - name: Auth
+    description: Authorization.
+  - name: Users
+    description: Manage Users.
+  - name: Articles
+    description: Manage Articles.

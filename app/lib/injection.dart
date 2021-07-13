@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -16,5 +17,7 @@ void configureInjection(String env) {
 
 /// Function that inits injection when App starts.
 Future<void> init() async {
-  s1.registerLazySingleton(() => InternetConnectionChecker());
+  s1
+    ..registerLazySingleton(() => InternetConnectionChecker())
+    ..registerLazySingleton(() => Connectivity());
 }
