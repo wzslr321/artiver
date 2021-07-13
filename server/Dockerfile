@@ -8,9 +8,4 @@ RUN apk add git gcc libc-dev \
 
 COPY . .
 
-<<<<<<< HEAD
 CMD ["air"]
-=======
-
-CMD ["air", "-d"]
->>>>>>> 638efce (.md files clarifications, docker configuration cleanup)
