@@ -14,14 +14,13 @@ services:
       context: server/docs
     ports:
       - '8080:8080'
-  #app_docs:
-  #  build:
-  #    context: app
-  #  ports:
-  #    - '8081:8081'
-  #  volumes:
-  #    - ./app/:/app/
-
+ # app_docs:
+ #   build:
+ #     context: app
+ #   ports:
+ #     - '8081:8081'
+ #   volumes:
+ #     - ./app:/app
   swagger-ui:
     image: docker.io/swaggerapi/swagger-ui
     environment:
