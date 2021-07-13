@@ -1,2 +1,7 @@
 .idea/
+<<<<<<< HEAD
 
+=======
+doc/
+server/bin/
+>>>>>>> a1443c0 (remove back-end bin files from git)
