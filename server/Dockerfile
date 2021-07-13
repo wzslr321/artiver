@@ -7,4 +7,4 @@ RUN apk add git gcc libc-dev \
 
 COPY . .
 
-CMD ["air", "-d"]
+CMD ["air"]
