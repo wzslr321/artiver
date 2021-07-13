@@ -20,7 +20,7 @@ var cfg *ini.File
 
 func InitSettings() {
 	var err error
-	cfg, err = ini.Load("conf/app.ini")
+	cfg, err = ini.Load("../conf/app.ini")
 	if err != nil {
 		log.Fatalf("settigs setup, failed to parse 'conf/app.ini' : %v", err)
 	}
