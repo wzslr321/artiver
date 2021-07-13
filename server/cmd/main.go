@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/rs/cors"
-	"github.com/wzslr321/artiver/routers"
+	"github.com/wzslr321/artiver/api/routers"
 	"github.com/wzslr321/artiver/settings"
 	"log"
 	"net/http"

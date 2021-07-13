@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/stretchr/testify/assert"
-	"github.com/wzslr321/artiver/routers"
+	"github.com/wzslr321/artiver/api/routers"
 	"net/http"
 	"net/http/httptest"
 	"testing"
