@@ -8,17 +8,23 @@ import (
 )
 
 type Server struct {
-	RunMode string
-	Address string
-	ReadTimeout time.Duration
-	WriteTimeout time.Duration
-	MaxHeaderBytes int
+	RunMode 		string
+	Address 		string
+	ReadTimeout 	time.Duration
+	WriteTimeout 	time.Duration
+	MaxHeaderBytes 	int
 }
 
 var ServerSettings = &Server{}
 
 var cfg *ini.File
 
+type Mongodb struct {
+	Address string
+	Uri	    string
+}
+
+var MongodbSettings = &Mongodb{}
 
 func InitSettings() {
 	var err error
@@ -28,7 +34,8 @@ func InitSettings() {
 		log.Fatalf("settigs setup, failed to parse 'conf/app.ini' : %v", err)
 	}
 
-	mapTo("server", ServerSettings)
+	mapTo("server",  ServerSettings)
+	mapTo("mongodb", MongodbSettings)
 	ServerSettings.ReadTimeout = ServerSettings.ReadTimeout * time.Second
 	ServerSettings.WriteTimeout = ServerSettings.WriteTimeout * time.Second
 }
