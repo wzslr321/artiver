@@ -1,6 +1,8 @@
 package entity
 
 import (
+	"context"
+	"github.com/wzslr321/artiver/api/db"
 	"go.mongodb.org/mongo-driver/x/mongo/driver/uuid"
 	"golang.org/x/crypto/bcrypt"
 	"log"
@@ -47,7 +49,7 @@ func generateID() ID {
 func NewUser(email, password, username string) (*User, error) {
 	id := generateID()
 
-	pwd, err := generatePassword(password); if err != nil {
+	pwd, err := generatePasswordHash(password); if err != nil {
 		return nil, err
 	}
 
@@ -63,11 +65,16 @@ func NewUser(email, password, username string) (*User, error) {
 		return nil, err
 	}
 
-	return u, nil
+	usersCollection := db.MongoClient.Database("artiver").Collection("users")
 
+	ctx := context.Background()
+
+	_, err = usersCollection.InsertOne(ctx, u)
+
+	return u, nil
 }
 
-func generatePassword(pwd string) (string,error) {
+func generatePasswordHash(pwd string) (string,error) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(pwd), 12); if err != nil {
 		errorLog.Fatalf("Error while hashing password: %v", err)
 	}

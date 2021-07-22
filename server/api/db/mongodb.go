@@ -9,15 +9,15 @@ import (
 	"time"
 )
 
-type DB struct {
-	client *mongo.Client
-}
+var MongoClient *mongo.Client
 
-func InitMongo() *DB {
+func InitMongo() {
 
 	oc := options.Client().ApplyURI(settings.MongodbSettings.Uri)
 
-	client, err := mongo.NewClient(oc)
+	var err error
+
+	MongoClient, err = mongo.NewClient(oc)
 	if err != nil {
 		log.Fatalf("Error occured while initializing a new mongo client: %v", err)
 	}
@@ -25,20 +25,18 @@ func InitMongo() *DB {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
-	err = client.Connect(ctx)
+	err = MongoClient.Connect(ctx)
 	if err != nil {
 		log.Fatalf("Errorr occurred while connecting to a client: %v", err)
 	}
 
 	defer func() {
-		if err = client.Disconnect(ctx); err != nil {
+		if err = MongoClient.Disconnect(ctx); err != nil {
 			panic(err)
 		}
 	}()
 
 	log.Println("Successfully connected to the database!")
 
-	return &DB{
-		client:client,
-	}
+
 }

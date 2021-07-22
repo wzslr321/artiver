@@ -20,6 +20,7 @@ func init() {
 	db.InitMongo()
 }
 
+
 func main() {
 
 	address := fmt.Sprintf(":%s", settings.ServerSettings.Address)
