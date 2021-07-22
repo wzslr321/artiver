@@ -20,7 +20,6 @@ var ServerSettings = &Server{}
 var cfg *ini.File
 
 type Mongodb struct {
-	Address string
 	Uri	    string
 }
 
@@ -29,9 +28,9 @@ var MongodbSettings = &Mongodb{}
 func InitSettings() {
 	var err error
 
-	cfg, err = ini.Load(conf.GetRootDir() + "/conf/app.ini")
+	cfg, err = ini.Load(conf.GetRootDir() + "/conf/conf_dev.ini")
 	if err != nil {
-		log.Fatalf("settigs setup, failed to parse 'conf/app.ini' : %v", err)
+		log.Fatalf("settings setup, failed to parse 'conf/conf_dev.ini' : %v", err)
 	}
 
 	mapTo("server",  ServerSettings)

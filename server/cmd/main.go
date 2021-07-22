@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/rs/cors"
-	"github.com/wzslr321/artiver/api"
+	"github.com/wzslr321/artiver/api/db"
 	"github.com/wzslr321/artiver/api/routers"
 	"github.com/wzslr321/artiver/settings"
 	"log"
@@ -17,7 +17,7 @@ import (
 
 func init() {
 	settings.InitSettings()
-	api.InitMongo()
+	db.InitMongo()
 }
 
 func main() {
