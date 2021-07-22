@@ -4,6 +4,7 @@ import (
 	"go.mongodb.org/mongo-driver/x/mongo/driver/uuid"
 	"golang.org/x/crypto/bcrypt"
 	"log"
+	"os"
 	"time"
 )
 
@@ -31,9 +32,11 @@ type User struct {
 	Reviews 	[]ID
 }
 
+var errorLog = log.New(os.Stdout, "ERROR\t,", log.Ldate|log.Ltime|log.Lshortfile)
+
 func generateID() ID {
 	id,err := uuid.New(); if err != nil {
-		log.Fatalf("Error while generating a unique id: %v", err)
+		errorLog.Fatalf("Error while generating a unique id: %v", err)
 	}
 
 	return ID{
@@ -56,7 +59,9 @@ func NewUser(email, password, username string) (*User, error) {
 		CreatedAt: time.Now(),
 	}
 
-	Validate(u)
+	err = Validate(u); if err != nil {
+		return nil, err
+	}
 
 	return u, nil
 
@@ -64,7 +69,7 @@ func NewUser(email, password, username string) (*User, error) {
 
 func generatePassword(pwd string) (string,error) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(pwd), 12); if err != nil {
-		log.Fatalf("Error while hashing password: %v", err)
+		errorLog.Fatalf("Error while hashing password: %v", err)
 	}
 
 	return string(hash), nil
@@ -72,16 +77,15 @@ func generatePassword(pwd string) (string,error) {
 
 
 
-func Validate(u *User) {
+func Validate(u *User) error{
 	// <!>
 	// Validation have to be compatible with front-end auth,
 	// which is not finished yet, thus for now validation
 	// is kept simple, needs to be extended later.
 	// <!>
 	if u.Email == "" || u.Username == "" || u.Password == "" {
-		// Custom error needs to be implemented and returned
-		// here instead
-		log.Fatalf("User did not pass the validation")
+		return ValidationError
 	}
 
+ 	return nil
 }
