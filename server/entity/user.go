@@ -69,7 +69,10 @@ func NewUser(email, password, username string) (*User, error) {
 
 	ctx := context.Background()
 
-	_, err = usersCollection.InsertOne(ctx, u)
+	_, err = usersCollection.InsertOne(ctx, u); if err != nil {
+		log.Fatalf("Failed to insert a user into a database: %v", err)
+		return nil, DatabaseError
+	}
 
 	return u, nil
 }
