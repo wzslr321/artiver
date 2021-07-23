@@ -2,7 +2,7 @@ package entity
 
 import (
 	"context"
-	"github.com/wzslr321/artiver/api/db"
+	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/x/mongo/driver/uuid"
 	"golang.org/x/crypto/bcrypt"
 	"log"
@@ -12,6 +12,10 @@ import (
 
 type ID struct {
 	id *uuid.UUID
+}
+
+type UserCollection struct {
+	C *mongo.Collection
 }
 
 type User struct {
@@ -46,7 +50,7 @@ func generateID() ID {
 	}
 }
 
-func NewUser(email, password, username string) (*User, error) {
+func (m *UserCollection) NewUser(email, password, username string) (*User, error) {
 	id := generateID()
 
 	pwd, err := generatePasswordHash(password); if err != nil {
@@ -61,15 +65,13 @@ func NewUser(email, password, username string) (*User, error) {
 		CreatedAt: time.Now(),
 	}
 
-	err = Validate(u); if err != nil {
+	err = validate(u); if err != nil {
 		return nil, err
 	}
 
-	usersCollection := db.MongoClient.Database("artiver").Collection("users")
-
 	ctx := context.Background()
 
-	_, err = usersCollection.InsertOne(ctx, u); if err != nil {
+	_, err = m.C.InsertOne(ctx, u); if err != nil {
 		log.Fatalf("Failed to insert a user into a database: %v", err)
 		return nil, DatabaseError
 	}
@@ -87,7 +89,7 @@ func generatePasswordHash(pwd string) (string,error) {
 
 
 
-func Validate(u *User) error{
+func validate(u *User) error{
 	// <!>
 	// Validation have to be compatible with front-end auth,
 	// which is not finished yet, thus for now validation

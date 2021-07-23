@@ -1,15 +1,13 @@
-package handler
+package api
 
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/wzslr321/artiver/api/presenter"
-	"github.com/wzslr321/artiver/entity"
 	"log"
 	"net/http"
 )
 
-
-func CreateUser(ctx *gin.Context) {
+func (app *application) CreateUser(ctx *gin.Context) {
 
 		var json presenter.Register
 		if err := ctx.ShouldBindJSON(&json); err != nil {
@@ -19,7 +17,7 @@ func CreateUser(ctx *gin.Context) {
 			return
 		}
 
-		user, err := entity.NewUser(json.Email, json.Username, json.Password)
+		user, err := app.users.NewUser(json.Email, json.Username, json.Password)
 		if err != nil {
 			log.Fatalf("Failed to create a new user: %v", err)
 			return

@@ -1,7 +1,8 @@
-package db
+package api
 
 import (
 	"context"
+	"github.com/wzslr321/artiver/entity"
 	"github.com/wzslr321/artiver/settings"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -9,15 +10,13 @@ import (
 	"time"
 )
 
-var MongoClient *mongo.Client
+var App *application
 
 func InitMongo() {
 
 	oc := options.Client().ApplyURI(settings.MongodbSettings.Uri)
 
-	var err error
-
-	MongoClient, err = mongo.NewClient(oc)
+	client, err := mongo.NewClient(oc)
 	if err != nil {
 		log.Fatalf("Error occured while initializing a new mongo client: %v", err)
 	}
@@ -25,13 +24,13 @@ func InitMongo() {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
-	err = MongoClient.Connect(ctx)
+	err = client.Connect(ctx)
 	if err != nil {
 		log.Fatalf("Errorr occurred while connecting to a client: %v", err)
 	}
 
 	defer func() {
-		if err = MongoClient.Disconnect(ctx); err != nil {
+		if err = client.Disconnect(ctx); err != nil {
 			panic(err)
 		}
 	}()
@@ -39,4 +38,9 @@ func InitMongo() {
 	log.Println("Successfully connected to the database!")
 
 
+	App = &application{
+		users: &entity.UserCollection{
+			C: client.Database("artiver").Collection("users"),
+		},
+	}
 }

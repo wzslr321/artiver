@@ -4,8 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/rs/cors"
-	"github.com/wzslr321/artiver/api/db"
-	"github.com/wzslr321/artiver/api/routers"
+	"github.com/wzslr321/artiver/api"
 	"github.com/wzslr321/artiver/settings"
 	"log"
 	"net/http"
@@ -17,14 +16,13 @@ import (
 
 func init() {
 	settings.InitSettings()
-	db.InitMongo()
+	api.InitMongo()
 }
-
 
 func main() {
 
 	address := fmt.Sprintf(":%s", settings.ServerSettings.Address)
-	router := cors.Default().Handler(routers.InitRouter())
+	router := cors.Default().Handler(api.App.InitRouter())
 	readTimeout := settings.ServerSettings.ReadTimeout
 	writeTimeout := settings.ServerSettings.WriteTimeout
 	maxHeaderBytes := settings.ServerSettings.MaxHeaderBytes
@@ -42,6 +40,7 @@ func main() {
 	err = server.ListenAndServe()
 
 	log.Printf("Server is running on port:  %s", address)
+
 
 	go func() {
 		if err = server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
