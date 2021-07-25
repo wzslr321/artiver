@@ -1,7 +1,7 @@
 package settings
 
 import (
-	"github.com/wzslr321/artiver/conf"
+	"github.com/wzslr321/artiver/server/user/conf"
 	"gopkg.in/ini.v1"
 	"log"
 	"time"
@@ -33,7 +33,7 @@ func InitSettings() {
 		log.Fatalf("settings setup, failed to parse 'conf/conf_dev.ini' : %v", err)
 	}
 
-	mapTo("server",  ServerSettings)
+	mapTo("server", ServerSettings)
 	mapTo("mongodb", MongodbSettings)
 	ServerSettings.ReadTimeout = ServerSettings.ReadTimeout * time.Second
 	ServerSettings.WriteTimeout = ServerSettings.WriteTimeout * time.Second

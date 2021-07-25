@@ -1,8 +1,8 @@
-package api
+package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/wzslr321/artiver/api/presenter"
+	"github.com/wzslr321/artiver/users/presenter"
 	"log"
 	"net/http"
 )

@@ -19,12 +19,12 @@ type UserCollection struct {
 }
 
 type User struct {
-	ID			ID
-	Email		string
-	Password 	string
-	Username 	string
-	CreatedAt 	time.Time
-	UpdatedAt 	time.Time
+	ID        ID
+	Email     string
+	Password  string
+	Username  string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 	// Preferences are an array of keywords that are used to filter and personalize articles.
 	Preferences []string
 	// Liked articles - contains an array of ID to make it more effective
