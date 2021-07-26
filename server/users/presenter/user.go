@@ -1,7 +1,7 @@
 package presenter
 
 import (
-	"github.com/wzslr321/artiver/entity"
+	"github.com/wzslr321/artiver/server/user/entity"
 )
 
 type User struct {

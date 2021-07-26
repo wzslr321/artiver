@@ -2,7 +2,7 @@ root = "."
 tmp_dir = "bin"
 
 [build]
-  bin = "./bin/cmd"
+  bin = "./bin/users"
   cmd = "make"
   delay = 1000
   exclude_dir = ["assets", "tmp", "vendor"]

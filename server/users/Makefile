@@ -19,7 +19,7 @@ dependencies:
 build: dependencies build-users
 
 build-users:
-	go build -o ./bin/users cmd/app/main.go
+	go build -o ../bin/users cmd/app/*.go
 
 linux-binaries:
 	CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -tags "$(LIBRARY_ENV) netgo" -installsuffix netgo -o $(BIN_DIR)/api api/main.go
