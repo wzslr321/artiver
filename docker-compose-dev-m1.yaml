@@ -33,7 +33,7 @@ services:
       retries: 30
   server:
     build:
-      context: serve
+      context: server
     environment:
       GIN_MODE: release
     ports:
