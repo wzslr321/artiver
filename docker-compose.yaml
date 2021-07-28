@@ -28,16 +28,17 @@ services:
       interval: 1s
       timeout: 3s
       retries: 30
-  server:
+  users:
     build:
-      context: server
+      context: server/users
     environment:
       GIN_MODE: release
     ports:
-      - '8000:8000'
+      - '8081:8081'
     volumes:
-      - ./server:/server
+      - ./server/users:/server/users
     depends_on:
       mongo:
         condition: service_healthy
-
+      redis:
+        condition: service_healthy

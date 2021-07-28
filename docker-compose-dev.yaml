@@ -32,9 +32,9 @@ services:
     build:
       context: server
     environment:
-      GIN_MODE: release
+      GIN_MODE: debug
     ports:
-      - '8000:8000'
+      - '8081:8081'
     volumes:
       - ./server:/server
   server_docs:
