@@ -59,7 +59,10 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./server/prometheus/:/etc/prometheus
+      - type: bind
+        source: ./server/prometheus-conf/prometheus.yml
+        target: /etc/prometheus/prometheus.yml
+        read_only: true
   go-prometheus:
     build:
       context: server/prometheus-microservice
@@ -67,3 +70,19 @@ services:
       - "9091:9091"
     volumes:
       - ./server/prometheus-microservice:/server/prometheus
+  traefik:
+    image: traefik
+    ports:
+      - target: 80
+        published: 80
+        protocol: "tcp"
+        mode: "host"
+      - target: 9092
+        published: 9092
+        protocol: "tcp"
+        mode: "host"
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /varun/run/docker.sock
+        read_only: true

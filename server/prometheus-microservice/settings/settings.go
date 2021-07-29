@@ -22,9 +22,9 @@ var cfg *ini.File
 func InitSettings() {
 	var err error
 
-	cfg, err = ini.Load(conf.GetRootDir() + "/conf/conf_dev.ini")
+	cfg, err = ini.Load(conf.GetRootDir() + "/conf/conf.ini")
 	if err != nil {
-		log.Fatalf("settings setup, failed to parse 'conf/conf_dev.ini' : %v", err)
+		log.Fatalf("settings setup, failed to parse 'conf/conf.ini' : %v", err)
 	}
 
 	mapTo("server", ServerSettings)

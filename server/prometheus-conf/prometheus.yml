@@ -1,7 +1,7 @@
 global:
   scrape_interval: 20s
   scrape_timeout: 15s
-  [query_log_file: "prometheus-promql-logs"]
+  evaluation_interval: 20s
 
 scrape_configs:
   - job_name: 'users'
@@ -11,4 +11,4 @@ scrape_configs:
   - job_name: 'push_gateway'
     scrape_interval: 15s
     static_configs:
-      - targets: ['host.docker.internal:9090']
+    - targets: ['host.docker.internal:9090']
