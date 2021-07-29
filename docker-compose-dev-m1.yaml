@@ -54,3 +54,16 @@ services:
       - "8090:8080"
     volumes:
       - ./docs/swagger-api-docs/swagger-api-docs.yaml:/swagger.json
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./server/prometheus/:/etc/prometheus
+  go-prometheus:
+    build:
+      context: server/prometheus-microservice
+    ports:
+      - "9091:9091"
+    volumes:
+      - ./server/prometheus-microservice:/server/prometheus

@@ -3,9 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	cors "github.com/rs/cors/wrapper/gin"
-	"github.com/wzslr321/artiver/server/user/entity"
-	"github.com/wzslr321/artiver/server/user/settings"
+	"github.com/artiver/server/prometheus/settings"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"log"
 	"net/http"
 	"os"
@@ -14,44 +13,33 @@ import (
 	"time"
 )
 
-type application struct {
-	users *entity.UserCollection
-}
-
-var app *application
-
 func init() {
 	settings.InitSettings()
-	initMongo()
 }
-
 
 func main() {
 	address := fmt.Sprintf(":%s", settings.ServerSettings.Address)
-	router := app.InitRouter()
 	readTimeout := settings.ServerSettings.ReadTimeout
 	writeTimeout := settings.ServerSettings.WriteTimeout
 	maxHeaderBytes := settings.ServerSettings.MaxHeaderBytes
 
-	router.Use(cors.Default())
-
-
-	server := &http.Server{
-		Addr:           address,
-		Handler:        router,
-		ReadTimeout:    readTimeout,
-		WriteTimeout:   writeTimeout,
+	s := &http.Server{
+		Addr: address,
+		ReadTimeout: readTimeout,
+		WriteTimeout: writeTimeout,
 		MaxHeaderBytes: maxHeaderBytes,
 	}
 
+	http.Handle("/metrics", promhttp.Handler())
+
 	var err error
 
-	err = server.ListenAndServe()
+	err = s.ListenAndServe()
 
 	log.Printf("Server is running on port:  %s", address)
 
 	go func() {
-		if err = server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		if err = s.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("Listen: %s\n", err)
 		}
 	}()
@@ -66,7 +54,7 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	if err = server.Shutdown(ctx); err != nil {
+	if err = s.Shutdown(ctx); err != nil {
 		log.Fatal("Server shutdown", err)
 	}
 

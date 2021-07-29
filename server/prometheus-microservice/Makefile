@@ -14,11 +14,11 @@ clean:
 
 dependencies:
 	go mod download
-  
-build: dependencies build-users
 
-build-users:
-	go build -o $(path)users cmd/app/*
+build: dependencies build-prometheus
+
+build-prometheus:
+	go build -o $(path)prometheus cmd/app/main.go
 
 ci: dependencies test
 
