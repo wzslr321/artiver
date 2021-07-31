@@ -6,6 +6,8 @@ import (
 	cors "github.com/rs/cors/wrapper/gin"
 	"github.com/wzslr321/artiver/server/user/entity"
 	"github.com/wzslr321/artiver/server/user/settings"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
 	"net/http"
 	"os"
@@ -13,6 +15,7 @@ import (
 	"syscall"
 	"time"
 )
+
 
 type application struct {
 	users *entity.UserCollection
@@ -22,11 +25,42 @@ var app *application
 
 func init() {
 	settings.InitSettings()
-	initMongo()
 }
 
 
 func main() {
+
+	oc := options.Client().ApplyURI(settings.MongodbSettings.Uri)
+
+
+	client, err := mongo.NewClient(oc)
+	if err != nil {
+		log.Printf("Error occured while initializing a new mongo client: %v", err)
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+	defer cancel()
+
+	err = client.Connect(ctx)
+	if err != nil {
+		log.Printf("Errorr occurred while connecting to a client: %v", err)
+	}
+
+	defer func() {
+		if err = client.Disconnect(ctx); err != nil {
+			panic(err)
+		}
+	}()
+
+	log.Println("Successfully connected to the database!")
+
+
+	app = &application{
+		users: &entity.UserCollection{
+			C: client.Database("artiver").Collection("users"),
+		},
+	}
+
 	address := fmt.Sprintf(":%s", settings.ServerSettings.Address)
 	router := app.InitRouter()
 	readTimeout := settings.ServerSettings.ReadTimeout
@@ -35,7 +69,6 @@ func main() {
 
 	router.Use(cors.Default())
 
-
 	server := &http.Server{
 		Addr:           address,
 		Handler:        router,
@@ -43,8 +76,6 @@ func main() {
 		WriteTimeout:   writeTimeout,
 		MaxHeaderBytes: maxHeaderBytes,
 	}
-
-	var err error
 
 	err = server.ListenAndServe()
 
@@ -63,7 +94,7 @@ func main() {
 	<-quit
 	log.Println("Shutting down the server...")
 
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	if err = server.Shutdown(ctx); err != nil {
@@ -74,4 +105,5 @@ func main() {
 	log.Println("Timeout of 5 seconds")
 
 	log.Println("Server exiting")
+
 }

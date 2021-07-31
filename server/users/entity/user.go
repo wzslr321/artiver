@@ -11,7 +11,7 @@ import (
 )
 
 type ID struct {
-	id *uuid.UUID
+	Id *uuid.UUID
 }
 
 type UserCollection struct {
@@ -46,7 +46,7 @@ func generateID() ID {
 	}
 
 	return ID{
-		id: &id,
+		Id: &id,
 	}
 }
 
