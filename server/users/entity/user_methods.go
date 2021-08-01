@@ -7,13 +7,14 @@ import (
 	"time"
 )
 
-
 func (m *UserCollection) NewUser(email, password, username string) (*User, error) {
-	id := pkg.GenerateID()
+	uuid := pkg.GenerateID()
+	id := ID{Id: uuid}
 
 	pwd, err := pkg.GeneratePasswordHash(password); if err != nil {
 		return nil, err
 	}
+
 
 	u := &User{
 		ID:		id,

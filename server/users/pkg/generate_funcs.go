@@ -1,7 +1,6 @@
 package pkg
 
 import (
-	"github.com/wzslr321/artiver/server/user/entity"
 	"go.mongodb.org/mongo-driver/x/mongo/driver/uuid"
 	"golang.org/x/crypto/bcrypt"
 	"log"
@@ -18,12 +17,10 @@ func GeneratePasswordHash(pwd string) (string,error) {
 	return string(hash), nil
 }
 
-func GenerateID() entity.ID {
+func GenerateID() *uuid.UUID {
 	id,err := uuid.New(); if err != nil {
 		errorLog.Fatalf("Error while generating a unique id: %v", err)
 	}
 
-	return entity.ID{
-		Id: &id,
-	}
+	return &id
 }
