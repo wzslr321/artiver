@@ -54,6 +54,11 @@ services:
       - "8090:8080"
     volumes:
       - ./docs/swagger-api-docs/swagger-api-docs.yaml:/swagger.json
+
+# Comment out prometheus and traefik containers since, those 
+# are not valid yet, but may be easily fixable for someone familiar 
+# with it and willing to contribute.
+
 #  prometheus:
 #    image: prom/prometheus
 #    ports:
@@ -63,6 +68,7 @@ services:
 #        source: ./server/prometheus-conf/prometheus.yml
 #        target: /etc/prometheus/prometheus.yml
 #        read_only: true
+
 #  go-prometheus:
 #    build:
 #      context: server/prometheus-microservice
@@ -70,26 +76,25 @@ services:
 #      - "9091:9091"
 #    volumes:
 #      - ./server/prometheus-microservice:/server/prometheus
-#    labels:
-#      - "traefik.http.routers.go-prometheus.rule=Host(`go-prometheus.docker.localhost`)"
-  reverse-proxy:
-    image: traefik:v2.4
-    command:
-      - "--api.insecure=true"
-      - "--providers.docker"
-      - "--api.dashboard=true"
-      - "--configFile=$PWD/traefik.yml"
-    ports:
-      - target: 80
-        published: 80
-        protocol: "tcp"
-        mode: "host"
-      - target: 8080
-        published: 8080
-        protocol: "tcp"
-        mode: "host"
-    volumes:
-      - type: bind
-        source: /var/run/docker.sock
-        target: /var/run/docker.sock
-        read_only: true
+
+#  reverse-proxy:
+#    image: traefik:v2.4
+#    command:
+#     - "--api.insecure=true"
+#      - "--providers.docker"
+#      - "--api.dashboard=true"
+#      - "--configFile=$PWD/traefik.yml"
+#    ports:
+#      - target: 80
+#        published: 80
+#        protocol: "tcp"
+#        mode: "host"
+#      - target: 8080
+#        published: 8080
+#        protocol: "tcp"
+#        mode: "host"
+#    volumes:
+#      - type: bind
+#        source: /var/run/docker.sock
+#        target: /var/run/docker.sock
+#        read_only: true

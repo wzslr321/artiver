@@ -1,2 +1,6 @@
 tmp/
 bin/
+# Add prometheus files to gitignore for now, since they are not related to the branch
+# and are not valid yet.
+prometheus-conf/
+prometheus-microservice/
