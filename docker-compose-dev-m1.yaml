@@ -45,8 +45,6 @@ services:
       context: server/docs
     ports:
       - '8082:8082'
-    labels:
-      - "traefik.http.routers.server-docs.rule=Host(`server-docs.docker.localhost`)"
   swagger-ui:
     image: docker.io/swaggerapi/swagger-ui
     environment:
@@ -56,19 +54,15 @@ services:
       - "8090:8080"
     volumes:
       - ./docs/swagger-api-docs/swagger-api-docs.yaml:/swagger.json
-    labels:
-      - "traefik.http.routers.swagger.rule=Host(`swagger-ui.docker.localhost`)"
-  prometheus:
-    image: prom/prometheus
-    ports:
-      - "9090:9090"
-    volumes:
-      - type: bind
-        source: ./server/prometheus-conf/prometheus.yml
-        target: /etc/prometheus/prometheus.yml
-        read_only: true
-    labels:
-      - "traefik.http.routers.prometheus.rule=Host(`prometheus.docker.localhost`)"
+#  prometheus:
+#    image: prom/prometheus
+#    ports:
+#      - "9090:9090"
+#    volumes:
+#      - type: bind
+#        source: ./server/prometheus-conf/prometheus.yml
+#        target: /etc/prometheus/prometheus.yml
+#        read_only: true
 #  go-prometheus:
 #    build:
 #      context: server/prometheus-microservice

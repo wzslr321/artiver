@@ -88,16 +88,3 @@ func generatePasswordHash(pwd string) (string,error) {
 }
 
 
-
-func validate(u *User) error{
-	// <!>
-	// Validation have to be compatible with front-end auth,
-	// which is not finished yet, thus for now validation
-	// is kept simple, needs to be extended later.
-	// <!>
-	if u.Email == "" || u.Username == "" || u.Password == "" {
-		return ValidationError
-	}
-
- 	return nil
-}
