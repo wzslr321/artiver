@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func (m *UserCollection) NewUser(email, password, username string) (*User, error) {
+func (m *UserCollection) NewUser(email, username, password string) (*User, error) {
 	uuid := pkg.GenerateID()
 	id := ID{Id: uuid}
 
@@ -24,7 +24,7 @@ func (m *UserCollection) NewUser(email, password, username string) (*User, error
 		CreatedAt: time.Now(),
 	}
 
-	err = validate(u); if err != nil {
+	err = validate(email, username, password); if err != nil {
 		return nil, err
 	}
 
