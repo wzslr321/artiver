@@ -44,7 +44,7 @@ func (m *UserCollection) NewUser(email, username, password string) (*User, error
 	return u, nil
 }
 func (m *UserCollection) GetAllUsers() ([]bson.D, error) {
-	ctx, cancel:= context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	cursor, err := m.C.Find(ctx, bson.D{})
@@ -66,7 +66,7 @@ func (m *UserCollection) GetAllUsers() ([]bson.D, error) {
 		if err != nil {
 			log.Printf("Eror occured while decoding users cursor result: %v", err)
 		}
-		usersList = append(usersList,result)
+		usersList = append(usersList, result)
 	}
 
 	if err = cursor.Err(); err != nil {
@@ -97,7 +97,7 @@ func (m *UserCollection) GetUserByUsername(username string) interface{} {
 	return result
 }
 
-func (m *UserCollection) DeleteUserById(id []byte) *mongo.DeleteResult{
+func (m *UserCollection) DeleteUserById(id []byte) *mongo.DeleteResult {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
@@ -110,4 +110,21 @@ func (m *UserCollection) DeleteUserById(id []byte) *mongo.DeleteResult{
 
 	return result
 
+}
+
+func (m *UserCollection) UpdateUserById(id []byte) bson.M {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	var updatedUser bson.M
+
+	err := m.C.FindOneAndUpdate(ctx, bson.D{{"id", id}}, bson.D{{"username", "test"}}).Decode(&updatedUser)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			msg := "Record \"username\" does not exist"
+			fmt.Println(msg)
+		}
+	}
+
+	return updatedUser
 }

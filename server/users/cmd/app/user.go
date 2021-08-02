@@ -55,7 +55,7 @@ func (app *application) getUserByUsername(ctx *gin.Context) {
 
 func (app *application) deleteUserById(ctx *gin.Context) {
 
-	var json presenter.DeleteUser
+	var json presenter.UserId
 	if err := ctx.ShouldBindJSON(&json); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -67,5 +67,21 @@ func (app *application) deleteUserById(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, gin.H{
 		"respond": res,
+	})
+}
+
+func (app *application) updateUserById(ctx *gin.Context) {
+	var json presenter.UserId
+	if err := ctx.ShouldBindJSON(&json); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	app.users.UpdateUserById(json.ID)
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"respond": "updated",
 	})
 }

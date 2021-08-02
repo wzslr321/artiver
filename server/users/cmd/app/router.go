@@ -23,7 +23,8 @@ func (app *application) InitRouter() *gin.Engine {
 		user.GET("/", app.getAllUsers)
 		user.POST("/add", app.createUser)
 		user.GET("/:username", app.getUserByUsername)
-		user.DELETE("/:id", app.deleteUserById)
+		user.DELETE("/", app.deleteUserById)
+		user.PUT("/", app.updateUserById)
 	}
 
 	return r
