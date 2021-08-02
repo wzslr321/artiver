@@ -6,9 +6,8 @@ import (
 	"time"
 )
 
-type ID struct {
-	Id *uuid.UUID
-}
+type ID *uuid.UUID
+
 
 type UserCollection struct {
 	C *mongo.Collection

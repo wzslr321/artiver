@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func (app *application) CreateUser(ctx *gin.Context) {
+func (app *application) createUser(ctx *gin.Context) {
 
 		var json presenter.Register
 		if err := ctx.ShouldBindJSON(&json); err != nil {
@@ -28,4 +28,17 @@ func (app *application) CreateUser(ctx *gin.Context) {
 			"message":"Successfully created new user",
 			"user": user,
 		})
+}
+
+func (app *application) getAllUsers(ctx *gin.Context) {
+
+}
+
+func (app *application) getUserByUsername(ctx *gin.Context) {
+	username := ctx.Param("username")
+	res := app.users.GetUserByUsername(username)
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"respond": res,
+	})
 }

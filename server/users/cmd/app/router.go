@@ -18,10 +18,10 @@ func (app *application) InitRouter() *gin.Engine {
 		ctx.String(http.StatusOK, "Hello World")
 	})
 
-	user := r.Group("/api/user")
+	user := r.Group("/api/users")
 	{
-		user.POST("/add", app.CreateUser)
-
+		user.POST("/add", app.createUser)
+		user.GET("/:username", app.getUserByUsername)
 	}
 
 	return r
