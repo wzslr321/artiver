@@ -9,8 +9,9 @@ import (
 
 var errorLog = log.New(os.Stdout, "ERROR\t,", log.Ldate|log.Ltime|log.Lshortfile)
 
-func GeneratePasswordHash(pwd string) (string,error) {
-	hash, err := bcrypt.GenerateFromPassword([]byte(pwd), 12); if err != nil {
+func GeneratePasswordHash(pwd string) (string, error) {
+	hash, err := bcrypt.GenerateFromPassword([]byte(pwd), 12)
+	if err != nil {
 		errorLog.Fatalf("Error while hashing password: %v", err)
 	}
 
@@ -18,7 +19,8 @@ func GeneratePasswordHash(pwd string) (string,error) {
 }
 
 func GenerateID() *uuid.UUID {
-	id,err := uuid.New(); if err != nil {
+	id, err := uuid.New()
+	if err != nil {
 		errorLog.Fatalf("Error while generating a unique id: %v", err)
 	}
 

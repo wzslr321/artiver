@@ -8,11 +8,11 @@ import (
 )
 
 type Server struct {
-	RunMode 		string
-	Address 		string
-	ReadTimeout 	time.Duration
-	WriteTimeout 	time.Duration
-	MaxHeaderBytes 	int
+	RunMode        string
+	Address        string
+	ReadTimeout    time.Duration
+	WriteTimeout   time.Duration
+	MaxHeaderBytes int
 }
 
 var ServerSettings = &Server{}
@@ -20,7 +20,7 @@ var ServerSettings = &Server{}
 var cfg *ini.File
 
 type Mongodb struct {
-	Uri	    string
+	Uri string
 }
 
 var MongodbSettings = &Mongodb{}

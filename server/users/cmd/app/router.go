@@ -20,6 +20,7 @@ func (app *application) InitRouter() *gin.Engine {
 
 	user := r.Group("/api/users")
 	{
+		user.GET("/", app.getAllUsers)
 		user.POST("/add", app.createUser)
 		user.GET("/:username", app.getUserByUsername)
 	}

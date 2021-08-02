@@ -6,11 +6,10 @@ import (
 	"unicode"
 )
 
-
-func validate(email, username, password string) error{
+func validate(email, username, password string) error {
 
 	var (
-		isEmailValid = validateEmail(email)
+		isEmailValid    = validateEmail(email)
 		isUsernameValid = validateUsername(username)
 		isPasswordValid = validatePassword(password)
 	)
@@ -20,21 +19,20 @@ func validate(email, username, password string) error{
 			isEmailValid: %v 
 			isUsernameValid: %v 
 			isPasswordValid: %v`,
-         	isEmailValid,isUsernameValid, isPasswordValid,
-         )
+			isEmailValid, isUsernameValid, isPasswordValid,
+		)
 		return ValidationError
 	}
-
 
 	return nil
 }
 
 func validateUsername(username string) bool {
 
-	var(
-		hasMinLen 		bool
-		hasExceededLen  bool
-		isValid 		bool
+	var (
+		hasMinLen      bool
+		hasExceededLen bool
+		isValid        bool
 	)
 
 	if len(username) >= 3 {
@@ -64,16 +62,16 @@ func validatePassword(password string) bool {
 	// https://stackoverflow.com/questions/25837241/password-validation-with-regexp?rq=1
 
 	var (
-		hasMinLen 		bool
-		hasExceededLen  bool
-		hasUppercase 	bool
-		hasLowercase	bool
-		hasNumber		bool
-		hasSpecialChar  bool
-		isValid 		bool
+		hasMinLen      bool
+		hasExceededLen bool
+		hasUppercase   bool
+		hasLowercase   bool
+		hasNumber      bool
+		hasSpecialChar bool
+		isValid        bool
 	)
 
-	if len(password) > 8 && len(password) <= 16{
+	if len(password) > 8 && len(password) <= 16 {
 		hasMinLen = true
 		hasExceededLen = false
 	}
@@ -113,11 +111,11 @@ func validatePassword(password string) bool {
 }
 
 func validateEmail(email string) bool {
-	var(
-		hasMinLen 		bool
-		hasAtChar 		bool
+	var (
+		hasMinLen       bool
+		hasAtChar       bool
 		hasAtCharAsLast bool
-		isValid 		bool
+		isValid         bool
 	)
 
 	if len(email) >= 3 && strings.Contains(email, "@") {
@@ -126,7 +124,7 @@ func validateEmail(email string) bool {
 	}
 
 	length := len(email)
-	if email[length - 1] == '@' {
+	if email[length-1] == '@' {
 		hasAtCharAsLast = true
 	}
 
@@ -144,4 +142,3 @@ func validateEmail(email string) bool {
 
 	return isValid
 }
-

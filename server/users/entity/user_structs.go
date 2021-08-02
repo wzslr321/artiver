@@ -8,7 +8,6 @@ import (
 
 type ID *uuid.UUID
 
-
 type UserCollection struct {
 	C *mongo.Collection
 }
@@ -24,11 +23,11 @@ type User struct {
 	Preferences []string
 	// Liked articles - contains an array of ID to make it more effective
 	// than storing whole articles. IDs will be simply used as a reference.
-	Liked 		[]ID
+	Liked []ID
 	// Articles - List of articles written by user. Holds an array of IDs
 	// to use them as a reference.
-	Articles 	[]ID
+	Articles []ID
 	// Reviews - List of reviews written by user. Holds an array of IDs
 	// to use them as a reference.
-	Reviews 	[]ID
+	Reviews []ID
 }

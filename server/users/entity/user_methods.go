@@ -13,41 +13,41 @@ func (m *UserCollection) NewUser(email, username, password string) (*User, error
 	uuid := pkg.GenerateID()
 	id := ID(uuid)
 
-	pwd, err := pkg.GeneratePasswordHash(password); if err != nil {
+	pwd, err := pkg.GeneratePasswordHash(password)
+	if err != nil {
 		return nil, err
 	}
 
-
 	u := &User{
-		Email: 		email,
-		Username: 	username,
-		Password: 	pwd,
-		ID:			id,
-		CreatedAt:  time.Now(),
+		Email:     email,
+		Username:  username,
+		Password:  pwd,
+		ID:        id,
+		CreatedAt: time.Now(),
 	}
 
-	err = validate(email, username, password); if err != nil {
+	err = validate(email, username, password)
+	if err != nil {
 		return nil, err
 	}
 
 	ctx := context.Background()
 
-	_, err = m.C.InsertOne(ctx, u); if err != nil {
+	_, err = m.C.InsertOne(ctx, u)
+	if err != nil {
 		log.Fatalf("Failed to insert a user into a database: %v", err)
 		return nil, DatabaseError
 	}
 
 	return u, nil
 }
-/*
-func (m *UserCollection) GetAllUsers() (*mongo.Cursor, error){
+func (m *UserCollection) GetAllUsers() (*mongo.Cursor, error) {
 	ctx := context.Background()
 
-	cursor, error := m.C.Find(ctx, bson.D{{"*", "*"}})
+	cursor, err := m.C.Find(ctx, bson.D{{"*", "*"}})
 
-
+	return cursor, err
 }
- */
 
 func (m *UserCollection) GetUserByUsername(username string) *mongo.SingleResult {
 	ctx := context.Background()
@@ -56,6 +56,3 @@ func (m *UserCollection) GetUserByUsername(username string) *mongo.SingleResult 
 
 	return res
 }
-
-
-

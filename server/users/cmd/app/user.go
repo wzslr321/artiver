@@ -31,7 +31,17 @@ func (app *application) createUser(ctx *gin.Context) {
 }
 
 func (app *application) getAllUsers(ctx *gin.Context) {
+	cursor,err := app.users.GetAllUsers()
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
 
+	ctx.JSON(http.StatusOK, gin.H{
+		"cursor": cursor,
+	})
 }
 
 func (app *application) getUserByUsername(ctx *gin.Context) {
