@@ -1,0 +1,50 @@
+http:
+  routers:
+    to-server:
+      rule: "Host(`artiver_server_1.docker.localhost`) && PathPrefix(`/server/api/`)"
+      service: server
+    to-prometheus:
+      rule: "Host(`prometheus.docker.localhost`) && PathPrefix(`/server/prometheus`)"
+      service: prometheus
+    to-go-prometheus:
+      rule: "Host(`go-prometheus.docker.localhost`) && PathPrefix(`/server/go-prometheus`)"
+      service: go-prometheus
+    to-swagger:
+      rule: "Host(`swagger-ui.docker.localhost`) && PathPrefix(`/server/swagger`)"
+      service: swagger-ui
+    to-server-docs:
+      rule: "Host(`server-docs.docker.localhost`) && PathPrefix(`/server/docs`)"
+      service: server-docs
+#   To app docs routes is commented out because of incompatibility with flutter image
+#   on docker-compose-dev-m1 config. When different configs will be used in
+#   particular docker compose configurations, it will be separated and commented out.
+#
+#    to-app-docs:
+#      rule: "Host(`app-docs.docker.localhost`) && PathPrefix(`/app/docs`)"
+#      service: app-docs
+
+  services:
+    server:
+      loadBalancer:
+        servers:
+          - url: http://private/server-service
+    prometheus:
+      loadBalancer:
+        servers:
+          - url: http://private/prometheus-service
+    go-prometheus:
+      loadBalancer:
+        servers:
+          - url: http://private/go-prometheus-service
+    swagger-ui:
+      loadBalancer:
+        servers:
+          - url: http://private/swagger-ui-service
+    server-docs:
+      loadBalancer:
+        servers:
+          - url: http://private/server-docs-service
+#    app-docs:
+#      loadBalancer:
+#        servers:
+#          - url: http://private/app-docs-service

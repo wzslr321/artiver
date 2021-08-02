@@ -45,6 +45,8 @@ Do this if you only want to do Flutter related stuff.
 
 With docker-compose properly configured, you just have to run `docker compose -f docker-compose-dev.yaml up` in the root directory of this project.
 
+Flutter docker image is incompatible with Mac's with M1. To run docker configuration that excludes it, run `docker compose -f docker-compose-dev-m1.yaml up`
+
 It starts also API and dart docs, respectively on ports 8080 and 8081.
 
 <i> Now you are ready to start coding! </i>

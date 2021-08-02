@@ -1,17 +1,17 @@
 package settings
 
 import (
-	"github.com/wzslr321/artiver/conf"
+	"github.com/wzslr321/artiver/server/user/conf"
 	"gopkg.in/ini.v1"
 	"log"
 	"time"
 )
 
 type Server struct {
-	RunMode string
-	Address string
-	ReadTimeout time.Duration
-	WriteTimeout time.Duration
+	RunMode        string
+	Address        string
+	ReadTimeout    time.Duration
+	WriteTimeout   time.Duration
 	MaxHeaderBytes int
 }
 
@@ -19,16 +19,22 @@ var ServerSettings = &Server{}
 
 var cfg *ini.File
 
+type Mongodb struct {
+	Uri string
+}
+
+var MongodbSettings = &Mongodb{}
 
 func InitSettings() {
 	var err error
 
-	cfg, err = ini.Load(conf.GetRootDir() + "/conf/app.ini")
+	cfg, err = ini.Load(conf.GetRootDir() + "/conf/conf_dev.ini")
 	if err != nil {
-		log.Fatalf("settigs setup, failed to parse 'conf/app.ini' : %v", err)
+		log.Fatalf("settings setup, failed to parse 'conf/conf_dev.ini' : %v", err)
 	}
 
 	mapTo("server", ServerSettings)
+	mapTo("mongodb", MongodbSettings)
 	ServerSettings.ReadTimeout = ServerSettings.ReadTimeout * time.Second
 	ServerSettings.WriteTimeout = ServerSettings.WriteTimeout * time.Second
 }

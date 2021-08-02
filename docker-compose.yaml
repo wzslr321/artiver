@@ -1,12 +1,44 @@
 version: '3.9'
 services:
-  server:
+  mongo:
+    image: mongo:5.0.0
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example    
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    volumes: 
+      - ./private/data/mongodb:/data/db
+    ports:
+      - "27017:27017"  
+  redis:
+    image: redis:6.2.4-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./private/data/redis:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+  users:
     build:
-      context: server
+      context: server/users
     environment:
       GIN_MODE: release
     ports:
-      - '8000:8000'
+      - '8081:8081'
     volumes:
-      - ./server:/server
-
+      - ./server/users:/server/users
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
