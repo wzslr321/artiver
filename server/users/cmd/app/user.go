@@ -52,3 +52,20 @@ func (app *application) getUserByUsername(ctx *gin.Context) {
 		"respond": res,
 	})
 }
+
+func (app *application) deleteUserById(ctx *gin.Context) {
+
+	var json presenter.DeleteUser
+	if err := ctx.ShouldBindJSON(&json); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	res := app.users.DeleteUserById(json.ID)
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"respond": res,
+	})
+}

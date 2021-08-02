@@ -10,11 +10,6 @@ import (
 	"time"
 )
 
-// <!> TODO <!> replace ctx vars = context.Background with:
-//
-// ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
-// defer cancel()
-
 func (m *UserCollection) NewUser(email, username, password string) (*User, error) {
 	uuid := pkg.GenerateID()
 	id := ID(uuid)
@@ -37,7 +32,8 @@ func (m *UserCollection) NewUser(email, username, password string) (*User, error
 		return nil, err
 	}
 
-	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
 
 	_, err = m.C.InsertOne(ctx, u)
 	if err != nil {
@@ -48,7 +44,8 @@ func (m *UserCollection) NewUser(email, username, password string) (*User, error
 	return u, nil
 }
 func (m *UserCollection) GetAllUsers() ([]bson.D, error) {
-	ctx := context.Background()
+	ctx, cancel:= context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
 
 	cursor, err := m.C.Find(ctx, bson.D{})
 	if err != nil {
@@ -79,6 +76,8 @@ func (m *UserCollection) GetAllUsers() ([]bson.D, error) {
 	return usersList, err
 }
 
+// GetUserByUsername requires change of return type,
+// it should properly return *User.
 func (m *UserCollection) GetUserByUsername(username string) interface{} {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -96,4 +95,19 @@ func (m *UserCollection) GetUserByUsername(username string) interface{} {
 	}
 
 	return result
+}
+
+func (m *UserCollection) DeleteUserById(id []byte) *mongo.DeleteResult{
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	result, err := m.C.DeleteOne(ctx, bson.D{{"id", id}})
+	if err != nil {
+		log.Printf("Error occured while deleting a User: %v", err)
+	}
+
+	log.Println(result.DeletedCount)
+
+	return result
+
 }
