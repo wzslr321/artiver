@@ -30,20 +30,6 @@ func (app *application) createUser(ctx *gin.Context) {
 		})
 }
 
-func (app *application) getAllUsers(ctx *gin.Context) {
-	cursor,err := app.users.GetAllUsers()
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
-		})
-		return
-	}
-
-	ctx.JSON(http.StatusOK, gin.H{
-		"cursor": cursor,
-	})
-}
-
 func (app *application) getUserByUsername(ctx *gin.Context) {
 	username := ctx.Param("username")
 	res := app.users.GetUserByUsername(username)
@@ -70,8 +56,8 @@ func (app *application) deleteUserById(ctx *gin.Context) {
 	})
 }
 
-func (app *application) updateUserById(ctx *gin.Context) {
-	var json presenter.UserId
+func (app *application) updateUser(ctx *gin.Context) {
+	var json presenter.User
 	if err := ctx.ShouldBindJSON(&json); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -79,9 +65,9 @@ func (app *application) updateUserById(ctx *gin.Context) {
 		return
 	}
 
-	app.users.UpdateUserById(json.ID)
+	res := app.users.UpdateUser(&json)
 
 	ctx.JSON(http.StatusOK, gin.H{
-		"respond": "updated",
+		"respond": res,
 	})
 }

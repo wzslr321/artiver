@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/wzslr321/artiver/server/user/pkg"
+	"github.com/wzslr321/artiver/server/user/presenter"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"log"
@@ -20,10 +21,10 @@ func (m *UserCollection) NewUser(email, username, password string) (*User, error
 	}
 
 	u := &User{
+		ID: id,
 		Email:     email,
 		Username:  username,
 		Password:  pwd,
-		ID:        id,
 		CreatedAt: time.Now(),
 	}
 
@@ -43,13 +44,23 @@ func (m *UserCollection) NewUser(email, username, password string) (*User, error
 
 	return u, nil
 }
+
+// This function currently is redundant.
+//
+// It returns an array of KeyValue objects,
+// which contains particular fields of User's model.
+// It actually may turn out to be useful,
+// and become a method to display similar profiles
+// to our interests.
+
+/*
 func (m *UserCollection) GetAllUsers() ([]bson.D, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	cursor, err := m.C.Find(ctx, bson.D{})
 	if err != nil {
-		log.Printf("Error occured while executing .Find method on users collection: %v", err)
+		log.Printf("Error occurred while executing .Find method on users collection: %v", err)
 	}
 	defer func(cursor *mongo.Cursor, ctx context.Context) {
 		err = cursor.Close(ctx)
@@ -64,7 +75,7 @@ func (m *UserCollection) GetAllUsers() ([]bson.D, error) {
 		var result bson.D
 		err = cursor.Decode(&result)
 		if err != nil {
-			log.Printf("Eror occured while decoding users cursor result: %v", err)
+			log.Printf("Error occurred while decoding users cursor result: %v", err)
 		}
 		usersList = append(usersList, result)
 	}
@@ -76,15 +87,13 @@ func (m *UserCollection) GetAllUsers() ([]bson.D, error) {
 	return usersList, err
 }
 
-// GetUserByUsername requires change of return type,
-// it should properly return *User.
-func (m *UserCollection) GetUserByUsername(username string) interface{} {
+ */
+
+func (m *UserCollection) GetUserByUsername(username string) bson.M {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	var result struct {
-		Value float64
-	}
+	var result bson.M
 
 	err := m.C.FindOne(ctx, bson.D{{"username", username}}).Decode(&result)
 	if err == mongo.ErrNoDocuments {
@@ -93,6 +102,8 @@ func (m *UserCollection) GetUserByUsername(username string) interface{} {
 	} else if err != nil {
 		log.Printf("Error occured while executing .FindOne method on UserCollection: %v", err)
 	}
+
+	fmt.Printf("result: %v\n", result)
 
 	return result
 }
@@ -112,18 +123,32 @@ func (m *UserCollection) DeleteUserById(id []byte) *mongo.DeleteResult {
 
 }
 
-func (m *UserCollection) UpdateUserById(id []byte) bson.M {
+func (m *UserCollection) UpdateUser(user *presenter.User) bson.M {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	var updatedUser bson.M
 
-	err := m.C.FindOneAndUpdate(ctx, bson.D{{"id", id}}, bson.D{{"username", "test"}}).Decode(&updatedUser)
+	update := bson.D{
+		{"$set", bson.D{
+			{"username", user.Username},
+			{"updatedat", time.Now()},
+			{"reviews", user.Reviews},
+			{"preferences", user.Preferences},
+			{"password", user.Password},
+			{"email", user.Email},
+			{"articles", user.Articles},
+			{"id", user.ID},
+		}},
+	}
+
+	err := m.C.FindOneAndUpdate(ctx, bson.D{{"id", user.ID}},update).Decode(&updatedUser)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			msg := "Record \"username\" does not exist"
+			msg := "Document with specified id does not exist"
 			fmt.Println(msg)
 		}
+		log.Printf("Error occured while exeuting .FindOneAndUpdate method: %v", err)
 	}
 
 	return updatedUser

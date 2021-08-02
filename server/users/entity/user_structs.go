@@ -13,7 +13,7 @@ type UserCollection struct {
 }
 
 type User struct {
-	ID        ID
+	ID 	ID
 	Email     string
 	Password  string
 	Username  string
