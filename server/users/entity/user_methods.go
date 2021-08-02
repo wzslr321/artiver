@@ -2,12 +2,18 @@ package entity
 
 import (
 	"context"
+	"fmt"
 	"github.com/wzslr321/artiver/server/user/pkg"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"log"
 	"time"
 )
+
+// <!> TODO <!> replace ctx vars = context.Background with:
+//
+// ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
+// defer cancel()
 
 func (m *UserCollection) NewUser(email, username, password string) (*User, error) {
 	uuid := pkg.GenerateID()
@@ -41,18 +47,53 @@ func (m *UserCollection) NewUser(email, username, password string) (*User, error
 
 	return u, nil
 }
-func (m *UserCollection) GetAllUsers() (*mongo.Cursor, error) {
+func (m *UserCollection) GetAllUsers() ([]bson.D, error) {
 	ctx := context.Background()
 
-	cursor, err := m.C.Find(ctx, bson.D{{"*", "*"}})
+	cursor, err := m.C.Find(ctx, bson.D{})
+	if err != nil {
+		log.Printf("Error occured while executing .Find method on users collection: %v", err)
+	}
+	defer func(cursor *mongo.Cursor, ctx context.Context) {
+		err = cursor.Close(ctx)
+		if err != nil {
+			log.Printf("Unable to close cursor: %v", err)
+		}
+	}(cursor, ctx)
 
-	return cursor, err
+	var usersList []bson.D
+
+	for cursor.Next(ctx) {
+		var result bson.D
+		err = cursor.Decode(&result)
+		if err != nil {
+			log.Printf("Eror occured while decoding users cursor result: %v", err)
+		}
+		usersList = append(usersList,result)
+	}
+
+	if err = cursor.Err(); err != nil {
+		log.Printf("Cursor returned error: %v", err)
+	}
+
+	return usersList, err
 }
 
-func (m *UserCollection) GetUserByUsername(username string) *mongo.SingleResult {
-	ctx := context.Background()
-	res := m.C.FindOne(ctx, bson.D{{"username", username}})
-	log.Println(res)
+func (m *UserCollection) GetUserByUsername(username string) interface{} {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
 
-	return res
+	var result struct {
+		Value float64
+	}
+
+	err := m.C.FindOne(ctx, bson.D{{"username", username}}).Decode(&result)
+	if err == mongo.ErrNoDocuments {
+		msg := "Record \"username\" does not exist"
+		fmt.Println(msg)
+	} else if err != nil {
+		log.Printf("Error occured while executing .FindOne method on UserCollection: %v", err)
+	}
+
+	return result
 }
