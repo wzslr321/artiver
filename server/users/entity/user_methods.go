@@ -21,7 +21,7 @@ func (m *UserCollection) NewUser(email, username, password string) (*User, error
 	}
 
 	u := &User{
-		ID: id,
+		ID:        id,
 		Email:     email,
 		Username:  username,
 		Password:  pwd,
@@ -87,7 +87,7 @@ func (m *UserCollection) GetAllUsers() ([]bson.D, error) {
 	return usersList, err
 }
 
- */
+*/
 
 func (m *UserCollection) GetUserByUsername(username string) bson.M {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
@@ -95,7 +95,7 @@ func (m *UserCollection) GetUserByUsername(username string) bson.M {
 
 	var result bson.M
 
-	err := m.C.FindOne(ctx, bson.D{{"username", username}}).Decode(&result)
+	err := m.C.FindOne(ctx, bson.D{{Key: "username", Value: username}}).Decode(&result)
 	if err == mongo.ErrNoDocuments {
 		msg := "Record \"username\" does not exist"
 		fmt.Println(msg)
@@ -112,7 +112,7 @@ func (m *UserCollection) DeleteUserById(id []byte) *mongo.DeleteResult {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	result, err := m.C.DeleteOne(ctx, bson.D{{"id", id}})
+	result, err := m.C.DeleteOne(ctx, bson.D{{Key: "id", Value: id}})
 	if err != nil {
 		log.Printf("Error occured while deleting a User: %v", err)
 	}
@@ -130,19 +130,19 @@ func (m *UserCollection) UpdateUser(user *presenter.User) bson.M {
 	var updatedUser bson.M
 
 	update := bson.D{
-		{"$set", bson.D{
-			{"username", user.Username},
-			{"updatedat", time.Now()},
-			{"reviews", user.Reviews},
-			{"preferences", user.Preferences},
-			{"password", user.Password},
-			{"email", user.Email},
-			{"articles", user.Articles},
-			{"id", user.ID},
+		{Key: "$set", Value: bson.D{
+			{Key: "username", Value: user.Username},
+			{Key: "updatedat", Value: time.Now()},
+			{Key: "reviews", Value: user.Reviews},
+			{Key: "preferences", Value: user.Preferences},
+			{Key: "password", Value: user.Password},
+			{Key: "email", Value: user.Email},
+			{Key: "articles", Value: user.Articles},
+			{Key: "id", Value: user.ID},
 		}},
 	}
 
-	err := m.C.FindOneAndUpdate(ctx, bson.D{{"id", user.ID}},update).Decode(&updatedUser)
+	err := m.C.FindOneAndUpdate(ctx, bson.D{{Key: "id", Value: user.ID}}, update).Decode(&updatedUser)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
 			msg := "Document with specified id does not exist"
