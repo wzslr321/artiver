@@ -1,14 +1,10 @@
 {
-    "helloWorld": "Hello World!",
-    "@helloWorld": {
-      "description": "The conventional newborn programmer greeting"
-    },
-    "connected": "Connected!",
-    "@connected": {
-      "description": "Notification message when connected"
-    },
-    "disconnected": "Disconnected!",
-    "@disconnected": {
-      "description": "Notification message when disconnected"
-    }
+  "connection_established": "Connected back!",
+  "@connection_established": {
+    "description": "Notification message displayed in Snackbar when user is connected back to the internet"
+  },
+  "connection_lost": "No internet connection found...",
+  "@connection_lost": {
+    "description": "Notification message displayed in Snackbar when user is disconnected from the internet."
+  }
 }

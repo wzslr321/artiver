@@ -1,19 +1,24 @@
-// ConnectionState hid because ConnectionBloc already has a class with the same name
+// ConnectionState hidden because ConnectionBloc already has a class with the same name
 // renaming the class or using a namespace for connection_bloc are also possible options
 import 'package:flutter/material.dart' hide ConnectionState;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../application/connection/connection_bloc.dart';
-import '../../../l10n/l10n.dart';
-import 'simple_snackbar.dart';
+import '../../../../application/connection/connection_bloc.dart';
+import '../../../../l10n/l10n.dart';
+import 'connection_snackbar.dart';
 
-/// A top level widget that listens connection state
+/// A top level widget that listens to the connection state.
 /// Must be located under the MaterialApp context to be able to show snackbar messages
 class ConnectionStateListenerWidget extends StatelessWidget {
-  /// ConnectionStateListenerWidget
+  /// [ConnectionStateListenerWidget] requires non-nullable named argument
+  /// responsible for the actual UI.
   const ConnectionStateListenerWidget({required this.child});
 
-  /// child widget
+  /// [child] refers to almost whole widget tree of the page.
+  ///
+  /// [ConnectionStateListenerWidget] will always be on the top level of the widget tree.
+  /// Unless [ConnectionState] is changed, it makes no impact on the actual page,
+  /// so in such a case, everything what is seen, is related to the [child].
   final Widget child;
 
   @override
@@ -23,12 +28,12 @@ class ConnectionStateListenerWidget extends StatelessWidget {
         state.map(
           connected: (_) {
             ScaffoldMessenger.of(context)
-                .showSnackBar(SimpleSnackBar(context.l10n.connected));
+                .showSnackBar(ConnectionSnackbar(context.l10n.connection_established));
           },
           connectedOnInitial: (_) {},
           connectedWithNoNetworkAccess: (_) {},
           disconnected: (_) => ScaffoldMessenger.of(context)
-              .showSnackBar(SimpleSnackBar(context.l10n.disconnected)),
+              .showSnackBar(ConnectionSnackbar(context.l10n.connection_lost)),
           initial: (_) {},
         );
       },

@@ -1,5 +1,5 @@
 
-FROM cirrusci/flutter
+FROM fischercode/flutter:2.5.0-5.0.pre
 
 WORKDIR /app
 
