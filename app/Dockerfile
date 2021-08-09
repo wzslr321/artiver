@@ -1,17 +1,13 @@
+FROM cirrusci/flutter:dev AS build
 
-FROM fischercode/flutter:2.5.0-5.0.pre
+WORKDIR /build
 
-WORKDIR /app
+RUN  flutter config --enable-web \
+    && sudo apt-get update \
+    && sudo apt-get install -y chromium-browser \
+    && sudo rm -rf /var/lib/apt/lists/* \
+    && flutter pub get
 
-COPY pubspec.yaml pubspec.yaml
-RUN flutter pub get
+COPY . .
 
-RUN flutter pub global activate dartdoc \
-    && flutter pub global activate dhttpd
-
-COPY lib/ lib/
-COPY .dart_tool/flutter_gen/ .dart_tool/flutter_gen/
-
-RUN flutter pub get --offline && dartdoc
-
-CMD ["/root/.pub-cache/bin/dhttpd","--path", "/app/doc/api", "--port", "8081", "--host", "0.0.0.0"]
+CMD ["flutter","run", "-d", "web-server", "--web-port 8000 --web-hostname 0.0.0.0"]
