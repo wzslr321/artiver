@@ -16,6 +16,10 @@ void configureInjection(String env) {
 }
 
 /// Function that inits injection when App starts.
+///
+/// It may be confusing, because running a command `flutter pub run build_runner watch/build`
+/// may result in failing and return an error message informing about those type
+/// being unregistered. In order to fix this, just run the application first.
 Future<void> init() async {
   s1
     ..registerLazySingleton(() => InternetConnectionChecker())
