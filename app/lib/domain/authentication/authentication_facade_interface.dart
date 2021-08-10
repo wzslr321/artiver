@@ -9,7 +9,8 @@ import 'authentication_failure.dart';
 /// This facade interface contains very little code. It is responsible for instantiating and
 /// delegating the code to the classes with the functions.
 ///
-///
+/// This class is implemented by AuthenticationFacade located in /app/lib/infrastructure/authentication directory.
+/// AuthenticationFacade overrides implemented methods and contains whole functionality of particular functions.
 abstract class AuthenticationFacadeInterface {
   Future<Either<AuthenticationFailure, Unit>>? registerWithEmailAndPassword({
     required String email,
@@ -23,3 +24,4 @@ abstract class AuthenticationFacadeInterface {
 
   Future<void> signOut();
 }
+
