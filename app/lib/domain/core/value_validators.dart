@@ -2,16 +2,21 @@ import 'package:fpdart/fpdart.dart';
 
 import 'failures.dart';
 
+/// [validateEmailAddress] checks if email contains '@' sign,
+/// is at least 3 characters long and if '@' isn't the last character.
+///
+/// Whether the email is valid or not, the same input is a part
+/// of a return statement, but as different site of [Either].
 Either<ValueFailure<String>, String> validateEmailAddress(String input) {
-  final _lastChar = input.length - 1;
+  final lastChar = input.length - 1;
 
-  final _hasMinLen = input.length >= 3;
-  final _hasAtChar = input.contains('@');
-  final _hasAtCharAsLast =  input[_lastChar] == '@';
+  final hasMinLen = input.length >= 3;
+  final hasAtChar = input.contains('@');
+  final hasAtCharAsLast =  input[lastChar] == '@';
 
-  final isValid = _hasMinLen && _hasAtChar && !_hasAtCharAsLast;
+  final isValid = hasMinLen && hasAtChar && !hasAtCharAsLast;
 
-  final _valueFailure = ValueFailure<String>.invalidEmail(incorrectValue: input);
+  final valueFailure = ValueFailure<String>.invalidEmail(incorrectValue: input);
 
-  return isValid ? Either.right(input) : Either.left(_valueFailure);
+  return isValid ? Either.right(input) : Either.left(valueFailure);
 }
