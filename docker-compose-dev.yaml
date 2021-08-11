@@ -42,11 +42,11 @@ services:
       context: server/docs
     ports:
       - '8080:8080'
-  app_web:
-    build:
-      context: app
-    ports: 
-      - '8000:8000'
+#  app_web:
+#    build:
+#      context: app
+#    ports: 
+#      - '8000:8000'
   app_docs:
     build:
       context: app/docs
