@@ -15,10 +15,31 @@ import '../../domain/authentication/value_objects.dart';
 /// It makes it possible to override revealed methods and code their functionality.
 class AuthenticationFacade implements AuthenticationFacadeInterface {
   @override
-  Future<Either<AuthenticationFailure, Unit>>? registerWithEmailAndPassword(
-      {required EmailAddress email, required Password password}) {
-    // TODO: implement registerWithEmailAndPassword
-    throw UnimplementedError();
+  Future<Either<AuthenticationFailure, Unit>>? registerWithEmailAndPassword({
+    required EmailAddress email,
+    required Password password,
+  }) async {
+    final emailString = email.getOrCrash();
+    final passwordString = password.getOrCrash();
+
+    /*
+    try {
+      // <!> TODO --> Create a method to register, with use of Dio and request to back-end server. <!>
+      // Consider creating a facade class like 'AuthRequester'
+      // Store URL's for requests in a different file.
+      return right(unit);
+    }
+    // <!> TODO --> Figure out how to receive an error from back-end response and use it in on catch block. <!>
+    on ?? catch (error) {
+      if error == email already in use {
+        return left(const AuthFailure.emailAlreadyInUse());
+      } else if error == username already in use {
+        return left(const AuthFailure.usernameAlreadyInUse());
+      } else {
+        return left(const AuthFailure.serverError());
+      }
+    }
+     */
   }
 
   @override
