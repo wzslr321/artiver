@@ -30,4 +30,12 @@ class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.invalidEmail({
     required String incorrectValue,
   }) = InvalidEmail<T>;
+
+  /// This takes only [incorrectValue] property as parameter.
+  /// [incorrectValue] is a string that must not be null,
+  /// It is user's pasword input which did not pass the validation.
+  /// [InvalidPassword] is a class generated in *.freezed* file.
+  const factory ValueFailure.invalidPassword({
+    required String incorrectValue,
+  }) = InvalidPassword<T>;
 }

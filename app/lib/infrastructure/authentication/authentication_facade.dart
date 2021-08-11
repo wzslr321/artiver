@@ -15,13 +15,15 @@ import '../../domain/authentication/value_objects.dart';
 /// It makes it possible to override revealed methods and code their functionality.
 class AuthenticationFacade implements AuthenticationFacadeInterface {
   @override
-  Future<Either<AuthenticationFailure, Unit>>? registerWithEmailAndPassword({required EmailAddress email, required String password}) {
+  Future<Either<AuthenticationFailure, Unit>>? registerWithEmailAndPassword(
+      {required EmailAddress email, required Password password}) {
     // TODO: implement registerWithEmailAndPassword
     throw UnimplementedError();
   }
 
   @override
-  Future<Either<AuthenticationFailure, Unit>>? signInWithEmailAndPassword({required EmailAddress email, required String password}) {
+  Future<Either<AuthenticationFailure, Unit>>? signInWithEmailAndPassword(
+      {required EmailAddress email, required Password password}) {
     // TODO: implement signInWithEmailAndPassword
     throw UnimplementedError();
   }

@@ -12,10 +12,20 @@ Either<ValueFailure<String>, String> validateEmailAddress(String input) {
 
   final hasMinLen = input.length >= 3;
   final hasAtChar = input.contains('@');
-  final hasAtCharAsLast =  input[lastChar] == '@';
+  final hasAtCharAsLast = input[lastChar] == '@';
 
   final isValid = hasMinLen && hasAtChar && !hasAtCharAsLast;
 
+  final valueFailure = ValueFailure<String>.invalidEmail(incorrectValue: input);
+
+  return isValid ? Either.right(input) : Either.left(valueFailure);
+}
+
+Either<ValueFailure<String>, String> validatePassword(String input) {
+  const passwordRegExp =
+      r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$';
+
+  final isValid = RegExp(passwordRegExp).hasMatch(input);
   final valueFailure = ValueFailure<String>.invalidEmail(incorrectValue: input);
 
   return isValid ? Either.right(input) : Either.left(valueFailure);

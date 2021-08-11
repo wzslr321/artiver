@@ -23,3 +23,14 @@ class EmailAddress extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 }
+
+class Password extends ValueObject<String> {
+  factory Password(String input) {
+    return Password._(validatePassword(input));
+  }
+
+  const Password._(this.value);
+
+  @override
+  final Either<ValueFailure<String>, String> value;
+}

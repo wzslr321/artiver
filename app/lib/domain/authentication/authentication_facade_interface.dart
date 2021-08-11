@@ -22,7 +22,7 @@ abstract class AuthenticationFacadeInterface {
   /// ok, no further actions needed.
   Future<Either<AuthenticationFailure, Unit>>? registerWithEmailAndPassword({
     required EmailAddress email,
-    required String password,
+    required Password password,
   });
 
   /// Method to sign in with e-mail and password.
@@ -33,7 +33,7 @@ abstract class AuthenticationFacadeInterface {
   /// returns a [Unit] which is fpdart's void replacement.
   Future<Either<AuthenticationFailure, Unit>>? signInWithEmailAndPassword({
     required EmailAddress email,
-    required String password,
+    required Password password,
   });
 
   /// Method to sign out user.
