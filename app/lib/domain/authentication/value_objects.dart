@@ -11,7 +11,8 @@ import '../core/value_validators.dart';
 /// that resolve common operations on value objects.
 @immutable
 class EmailAddress extends ValueObject<String> {
-  /// Use factory to access [validateEmailAddress] that returns
+  /// Use factory to access [validateEmailAddress] in a constructor
+  /// without creating a new instance of the class. It returns
   /// a [String] if user's email input passes the validation
   /// or [ValueFailure] if it fails.
   factory EmailAddress(String input) {
@@ -24,7 +25,15 @@ class EmailAddress extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 }
 
+/// A class that represents [String] coming from User's password input.
+///
+/// It extends [ValueObject] to get access to the methods,
+/// that resolve common operations on value objects.
 class Password extends ValueObject<String> {
+  /// Use factory to access [validatePassword] in a constructor
+  // without creating a new instance of the class. It returns
+  /// a [String] if user's password input passes the validation
+  /// or [ValueFailure] if it fails.
   factory Password(String input) {
     return Password._(validatePassword(input));
   }
