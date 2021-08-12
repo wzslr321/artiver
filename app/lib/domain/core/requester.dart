@@ -6,10 +6,10 @@ import 'errors.dart';
 import 'request_failure.dart';
 
 @immutable
-abstract class Requester{
-  const Requester(this.url);
+abstract class Requester {
+  const Requester();
 
-  final String url;
+  String get url;
 
   Future<Either<RequestError, Response<String>>> sendRequest() async {
     try {

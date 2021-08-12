@@ -27,8 +27,8 @@ class ConnectionStateListenerWidget extends StatelessWidget {
       listener: (context, state) {
         state.map(
           connected: (_) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(ConnectionSnackbar(context.l10n.connection_established));
+            ScaffoldMessenger.of(context).showSnackBar(
+                ConnectionSnackbar(context.l10n.connection_established));
           },
           connectedOnInitial: (_) {},
           connectedWithNoNetworkAccess: (_) {},
