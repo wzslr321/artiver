@@ -1,13 +1,10 @@
-import 'package:artiver/domain/core/request_failure.dart';
-import 'package:artiver/domain/core/requester.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:injectable/injectable.dart';
 
 import '../../domain/authentication/authentication_facade_interface.dart';
 import '../../domain/authentication/authentication_failure.dart';
 import '../../domain/authentication/value_objects.dart';
+import '../../domain/core/requester.dart';
 import 'authentication_requester_facade.dart';
 
 /// AuthenticationFacade responsible for implementing functionality of authorization methods.
@@ -19,11 +16,7 @@ import 'authentication_requester_facade.dart';
 ///
 /// This class implements [AuthenticationFacadeInterface] located in /app/lib/domain/authentication directory.
 /// It makes it possible to override revealed methods and code their functionality.
-@injectable
 class AuthenticationFacade implements AuthenticationFacadeInterface {
-  AuthenticationFacade(this._authFacade);
-
-  final AuthenticationRequesterFacade _authFacade;
 
   @override
   Future<Either<AuthenticationFailure, Unit>> registerWithEmailAndPassword({
@@ -34,19 +27,19 @@ class AuthenticationFacade implements AuthenticationFacadeInterface {
     final passwordString = password.getOrCrash();
 
     try {
-      // <!> TODO --> Create a method to register, with use of Dio and request to back-end server. <!>
-      // Consider creating a facade class like 'AuthRequester'
-      // Store URL's for requests in a different file.
       await Requester.sendRequest(
-        () => _authFacade.requestToCreateUser(
+        () => AuthenticationRequesterFacade().requestToCreateUser(
           email: emailString,
           password: passwordString,
         ),
       );
+
       return right(unit);
     } on PlatformException catch (error) {
       if (error.code == 'email-already-in-use') {
         return left(const AuthenticationFailure.emailAlreadyInUse());
+      } else {
+        return left(const AuthenticationFailure.serverError());
       }
     }
   }

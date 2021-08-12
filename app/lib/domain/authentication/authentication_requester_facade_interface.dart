@@ -1,8 +1,8 @@
-import 'package:artiver/domain/core/requester.dart';
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 
 import '../core/request_failure.dart';
+import '../core/requester.dart';
 
 
 abstract class AuthenticationRequesterFacadeInterface implements Requester{

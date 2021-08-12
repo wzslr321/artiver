@@ -1,5 +1,4 @@
-import 'package:artiver/domain/core/request_failure.dart';
-import 'package:artiver/domain/core/value_failures.dart';
+import 'value_failures.dart';
 
 /// Class that handles unexpected Error, that should've never happened.
 ///

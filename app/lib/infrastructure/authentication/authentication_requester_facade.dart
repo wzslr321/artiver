@@ -1,19 +1,16 @@
-import 'package:artiver/domain/core/errors.dart';
-import 'package:artiver/domain/core/request_failure.dart';
-import 'package:artiver/domain/core/requester.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:dio/dio.dart';
+import 'package:fpdart/fpdart.dart';
 
-import '../../domain/authentication/authentication_failure.dart';
 import '../../domain/authentication/authentication_requester_facade_interface.dart';
+import '../../domain/core/request_failure.dart';
 
 class AuthenticationRequesterFacade
     implements AuthenticationRequesterFacadeInterface {
   @override
   Future<Either<RequestFailure, Response<String>>> requestToCreateUser(
       {required String email, required String password}) {
-
-    });
+    // do sth with dio, to be implemented
+    throw UnimplementedError();
   }
 
   @override
@@ -43,14 +40,4 @@ class AuthenticationRequesterFacade
     // TODO: implement requestToChangeUsername
     throw UnimplementedError();
   }
-
-  @override
-  Future<Either<RequestError, Response<String>>> sendRequest() {
-    // TODO: implement sendRequest
-    throw UnimplementedError();
-  }
-
-  @override
-  // TODO: implement url
-  String get url => throw UnimplementedError();
 }
