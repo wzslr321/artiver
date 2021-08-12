@@ -12,6 +12,7 @@ dependencies:
   auto_route: ^2.2.0
   connectivity_plus: ^1.0.4
   cupertino_icons: ^1.0.2
+  dio: 4.0.0
   flutter:
     sdk: flutter
   flutter_bloc: ^7.0.1
