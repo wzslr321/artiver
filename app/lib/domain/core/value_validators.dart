@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 
-import 'failures.dart';
+import 'value_failures.dart';
 
 /// [validateEmailAddress] checks if email contains '@' sign,
 /// is at least 3 characters long and if '@' isn't the last character.

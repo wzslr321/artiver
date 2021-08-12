@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 
-import '../core/failures.dart';
+import '../core/value_failures.dart';
 import '../core/value_objects.dart';
 import '../core/value_validators.dart';
 

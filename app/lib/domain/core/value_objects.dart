@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 
 import 'errors.dart';
-import 'failures.dart';
+import 'value_failures.dart';
 
 /// Immutable class that make use of generic types to create overridable methods,
 /// that clarifies basic operations that can be performed on particular values.

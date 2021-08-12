@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'failures.freezed.dart';
+part 'value_failures.freezed.dart';
 
 /// Immutable class that handles errors related to incorrect values.
 ///
