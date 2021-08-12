@@ -16,27 +16,27 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$RequestFailureTearOff {
   const _$RequestFailureTearOff();
 
-  noResponse<T> noResponse<T>({required DioError response}) {
-    return noResponse<T>(
+  noResponse noResponse({required DioError response}) {
+    return noResponse(
       response: response,
     );
   }
 
-  InvalidResponseStatusCode<T> invalidResponseStatusCode<T>(
+  InvalidResponseStatusCode invalidResponseStatusCode(
       {required DioError response}) {
-    return InvalidResponseStatusCode<T>(
+    return InvalidResponseStatusCode(
       response: response,
     );
   }
 
-  InvalidUrl<T> invalidUrl<T>({required DioError url}) {
-    return InvalidUrl<T>(
+  InvalidUrl invalidUrl({required DioError url}) {
+    return InvalidUrl(
       url: url,
     );
   }
 
-  InvalidRequestBody<T> invalidRequestBody<T>({required DioError body}) {
-    return InvalidRequestBody<T>(
+  InvalidRequestBody invalidRequestBody({required DioError body}) {
+    return InvalidRequestBody(
       body: body,
     );
   }
@@ -46,7 +46,7 @@ class _$RequestFailureTearOff {
 const $RequestFailure = _$RequestFailureTearOff();
 
 /// @nodoc
-mixin _$RequestFailure<T> {
+mixin _$RequestFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(DioError response) noResponse,
@@ -66,66 +66,64 @@ mixin _$RequestFailure<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(noResponse<T> value) noResponse,
-    required TResult Function(InvalidResponseStatusCode<T> value)
+    required TResult Function(noResponse value) noResponse,
+    required TResult Function(InvalidResponseStatusCode value)
         invalidResponseStatusCode,
-    required TResult Function(InvalidUrl<T> value) invalidUrl,
-    required TResult Function(InvalidRequestBody<T> value) invalidRequestBody,
+    required TResult Function(InvalidUrl value) invalidUrl,
+    required TResult Function(InvalidRequestBody value) invalidRequestBody,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(noResponse<T> value)? noResponse,
-    TResult Function(InvalidResponseStatusCode<T> value)?
+    TResult Function(noResponse value)? noResponse,
+    TResult Function(InvalidResponseStatusCode value)?
         invalidResponseStatusCode,
-    TResult Function(InvalidUrl<T> value)? invalidUrl,
-    TResult Function(InvalidRequestBody<T> value)? invalidRequestBody,
+    TResult Function(InvalidUrl value)? invalidUrl,
+    TResult Function(InvalidRequestBody value)? invalidRequestBody,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RequestFailureCopyWith<T, $Res> {
+abstract class $RequestFailureCopyWith<$Res> {
   factory $RequestFailureCopyWith(
-          RequestFailure<T> value, $Res Function(RequestFailure<T>) then) =
-      _$RequestFailureCopyWithImpl<T, $Res>;
+          RequestFailure value, $Res Function(RequestFailure) then) =
+      _$RequestFailureCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$RequestFailureCopyWithImpl<T, $Res>
-    implements $RequestFailureCopyWith<T, $Res> {
+class _$RequestFailureCopyWithImpl<$Res>
+    implements $RequestFailureCopyWith<$Res> {
   _$RequestFailureCopyWithImpl(this._value, this._then);
 
-  final RequestFailure<T> _value;
+  final RequestFailure _value;
   // ignore: unused_field
-  final $Res Function(RequestFailure<T>) _then;
+  final $Res Function(RequestFailure) _then;
 }
 
 /// @nodoc
-abstract class $noResponseCopyWith<T, $Res> {
+abstract class $noResponseCopyWith<$Res> {
   factory $noResponseCopyWith(
-          noResponse<T> value, $Res Function(noResponse<T>) then) =
-      _$noResponseCopyWithImpl<T, $Res>;
+          noResponse value, $Res Function(noResponse) then) =
+      _$noResponseCopyWithImpl<$Res>;
   $Res call({DioError response});
 }
 
 /// @nodoc
-class _$noResponseCopyWithImpl<T, $Res>
-    extends _$RequestFailureCopyWithImpl<T, $Res>
-    implements $noResponseCopyWith<T, $Res> {
-  _$noResponseCopyWithImpl(
-      noResponse<T> _value, $Res Function(noResponse<T>) _then)
-      : super(_value, (v) => _then(v as noResponse<T>));
+class _$noResponseCopyWithImpl<$Res> extends _$RequestFailureCopyWithImpl<$Res>
+    implements $noResponseCopyWith<$Res> {
+  _$noResponseCopyWithImpl(noResponse _value, $Res Function(noResponse) _then)
+      : super(_value, (v) => _then(v as noResponse));
 
   @override
-  noResponse<T> get _value => super._value as noResponse<T>;
+  noResponse get _value => super._value as noResponse;
 
   @override
   $Res call({
     Object? response = freezed,
   }) {
-    return _then(noResponse<T>(
+    return _then(noResponse(
       response: response == freezed
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
@@ -136,7 +134,7 @@ class _$noResponseCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$noResponse<T> implements noResponse<T> {
+class _$noResponse implements noResponse {
   const _$noResponse({required this.response});
 
   @override
@@ -144,13 +142,13 @@ class _$noResponse<T> implements noResponse<T> {
 
   @override
   String toString() {
-    return 'RequestFailure<$T>.noResponse(response: $response)';
+    return 'RequestFailure.noResponse(response: $response)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is noResponse<T> &&
+        (other is noResponse &&
             (identical(other.response, response) ||
                 const DeepCollectionEquality()
                     .equals(other.response, response)));
@@ -162,8 +160,8 @@ class _$noResponse<T> implements noResponse<T> {
 
   @JsonKey(ignore: true)
   @override
-  $noResponseCopyWith<T, noResponse<T>> get copyWith =>
-      _$noResponseCopyWithImpl<T, noResponse<T>>(this, _$identity);
+  $noResponseCopyWith<noResponse> get copyWith =>
+      _$noResponseCopyWithImpl<noResponse>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -194,11 +192,11 @@ class _$noResponse<T> implements noResponse<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(noResponse<T> value) noResponse,
-    required TResult Function(InvalidResponseStatusCode<T> value)
+    required TResult Function(noResponse value) noResponse,
+    required TResult Function(InvalidResponseStatusCode value)
         invalidResponseStatusCode,
-    required TResult Function(InvalidUrl<T> value) invalidUrl,
-    required TResult Function(InvalidRequestBody<T> value) invalidRequestBody,
+    required TResult Function(InvalidUrl value) invalidUrl,
+    required TResult Function(InvalidRequestBody value) invalidRequestBody,
   }) {
     return noResponse(this);
   }
@@ -206,11 +204,11 @@ class _$noResponse<T> implements noResponse<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(noResponse<T> value)? noResponse,
-    TResult Function(InvalidResponseStatusCode<T> value)?
+    TResult Function(noResponse value)? noResponse,
+    TResult Function(InvalidResponseStatusCode value)?
         invalidResponseStatusCode,
-    TResult Function(InvalidUrl<T> value)? invalidUrl,
-    TResult Function(InvalidRequestBody<T> value)? invalidRequestBody,
+    TResult Function(InvalidUrl value)? invalidUrl,
+    TResult Function(InvalidRequestBody value)? invalidRequestBody,
     required TResult orElse(),
   }) {
     if (noResponse != null) {
@@ -220,40 +218,40 @@ class _$noResponse<T> implements noResponse<T> {
   }
 }
 
-abstract class noResponse<T> implements RequestFailure<T> {
-  const factory noResponse({required DioError response}) = _$noResponse<T>;
+abstract class noResponse implements RequestFailure {
+  const factory noResponse({required DioError response}) = _$noResponse;
 
   DioError get response => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $noResponseCopyWith<T, noResponse<T>> get copyWith =>
+  $noResponseCopyWith<noResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $InvalidResponseStatusCodeCopyWith<T, $Res> {
-  factory $InvalidResponseStatusCodeCopyWith(InvalidResponseStatusCode<T> value,
-          $Res Function(InvalidResponseStatusCode<T>) then) =
-      _$InvalidResponseStatusCodeCopyWithImpl<T, $Res>;
+abstract class $InvalidResponseStatusCodeCopyWith<$Res> {
+  factory $InvalidResponseStatusCodeCopyWith(InvalidResponseStatusCode value,
+          $Res Function(InvalidResponseStatusCode) then) =
+      _$InvalidResponseStatusCodeCopyWithImpl<$Res>;
   $Res call({DioError response});
 }
 
 /// @nodoc
-class _$InvalidResponseStatusCodeCopyWithImpl<T, $Res>
-    extends _$RequestFailureCopyWithImpl<T, $Res>
-    implements $InvalidResponseStatusCodeCopyWith<T, $Res> {
-  _$InvalidResponseStatusCodeCopyWithImpl(InvalidResponseStatusCode<T> _value,
-      $Res Function(InvalidResponseStatusCode<T>) _then)
-      : super(_value, (v) => _then(v as InvalidResponseStatusCode<T>));
+class _$InvalidResponseStatusCodeCopyWithImpl<$Res>
+    extends _$RequestFailureCopyWithImpl<$Res>
+    implements $InvalidResponseStatusCodeCopyWith<$Res> {
+  _$InvalidResponseStatusCodeCopyWithImpl(InvalidResponseStatusCode _value,
+      $Res Function(InvalidResponseStatusCode) _then)
+      : super(_value, (v) => _then(v as InvalidResponseStatusCode));
 
   @override
-  InvalidResponseStatusCode<T> get _value =>
-      super._value as InvalidResponseStatusCode<T>;
+  InvalidResponseStatusCode get _value =>
+      super._value as InvalidResponseStatusCode;
 
   @override
   $Res call({
     Object? response = freezed,
   }) {
-    return _then(InvalidResponseStatusCode<T>(
+    return _then(InvalidResponseStatusCode(
       response: response == freezed
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
@@ -264,7 +262,7 @@ class _$InvalidResponseStatusCodeCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$InvalidResponseStatusCode<T> implements InvalidResponseStatusCode<T> {
+class _$InvalidResponseStatusCode implements InvalidResponseStatusCode {
   const _$InvalidResponseStatusCode({required this.response});
 
   @override
@@ -272,13 +270,13 @@ class _$InvalidResponseStatusCode<T> implements InvalidResponseStatusCode<T> {
 
   @override
   String toString() {
-    return 'RequestFailure<$T>.invalidResponseStatusCode(response: $response)';
+    return 'RequestFailure.invalidResponseStatusCode(response: $response)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is InvalidResponseStatusCode<T> &&
+        (other is InvalidResponseStatusCode &&
             (identical(other.response, response) ||
                 const DeepCollectionEquality()
                     .equals(other.response, response)));
@@ -290,9 +288,9 @@ class _$InvalidResponseStatusCode<T> implements InvalidResponseStatusCode<T> {
 
   @JsonKey(ignore: true)
   @override
-  $InvalidResponseStatusCodeCopyWith<T, InvalidResponseStatusCode<T>>
-      get copyWith => _$InvalidResponseStatusCodeCopyWithImpl<T,
-          InvalidResponseStatusCode<T>>(this, _$identity);
+  $InvalidResponseStatusCodeCopyWith<InvalidResponseStatusCode> get copyWith =>
+      _$InvalidResponseStatusCodeCopyWithImpl<InvalidResponseStatusCode>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -323,11 +321,11 @@ class _$InvalidResponseStatusCode<T> implements InvalidResponseStatusCode<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(noResponse<T> value) noResponse,
-    required TResult Function(InvalidResponseStatusCode<T> value)
+    required TResult Function(noResponse value) noResponse,
+    required TResult Function(InvalidResponseStatusCode value)
         invalidResponseStatusCode,
-    required TResult Function(InvalidUrl<T> value) invalidUrl,
-    required TResult Function(InvalidRequestBody<T> value) invalidRequestBody,
+    required TResult Function(InvalidUrl value) invalidUrl,
+    required TResult Function(InvalidRequestBody value) invalidRequestBody,
   }) {
     return invalidResponseStatusCode(this);
   }
@@ -335,11 +333,11 @@ class _$InvalidResponseStatusCode<T> implements InvalidResponseStatusCode<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(noResponse<T> value)? noResponse,
-    TResult Function(InvalidResponseStatusCode<T> value)?
+    TResult Function(noResponse value)? noResponse,
+    TResult Function(InvalidResponseStatusCode value)?
         invalidResponseStatusCode,
-    TResult Function(InvalidUrl<T> value)? invalidUrl,
-    TResult Function(InvalidRequestBody<T> value)? invalidRequestBody,
+    TResult Function(InvalidUrl value)? invalidUrl,
+    TResult Function(InvalidRequestBody value)? invalidRequestBody,
     required TResult orElse(),
   }) {
     if (invalidResponseStatusCode != null) {
@@ -349,40 +347,38 @@ class _$InvalidResponseStatusCode<T> implements InvalidResponseStatusCode<T> {
   }
 }
 
-abstract class InvalidResponseStatusCode<T> implements RequestFailure<T> {
+abstract class InvalidResponseStatusCode implements RequestFailure {
   const factory InvalidResponseStatusCode({required DioError response}) =
-      _$InvalidResponseStatusCode<T>;
+      _$InvalidResponseStatusCode;
 
   DioError get response => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $InvalidResponseStatusCodeCopyWith<T, InvalidResponseStatusCode<T>>
-      get copyWith => throw _privateConstructorUsedError;
+  $InvalidResponseStatusCodeCopyWith<InvalidResponseStatusCode> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $InvalidUrlCopyWith<T, $Res> {
+abstract class $InvalidUrlCopyWith<$Res> {
   factory $InvalidUrlCopyWith(
-          InvalidUrl<T> value, $Res Function(InvalidUrl<T>) then) =
-      _$InvalidUrlCopyWithImpl<T, $Res>;
+          InvalidUrl value, $Res Function(InvalidUrl) then) =
+      _$InvalidUrlCopyWithImpl<$Res>;
   $Res call({DioError url});
 }
 
 /// @nodoc
-class _$InvalidUrlCopyWithImpl<T, $Res>
-    extends _$RequestFailureCopyWithImpl<T, $Res>
-    implements $InvalidUrlCopyWith<T, $Res> {
-  _$InvalidUrlCopyWithImpl(
-      InvalidUrl<T> _value, $Res Function(InvalidUrl<T>) _then)
-      : super(_value, (v) => _then(v as InvalidUrl<T>));
+class _$InvalidUrlCopyWithImpl<$Res> extends _$RequestFailureCopyWithImpl<$Res>
+    implements $InvalidUrlCopyWith<$Res> {
+  _$InvalidUrlCopyWithImpl(InvalidUrl _value, $Res Function(InvalidUrl) _then)
+      : super(_value, (v) => _then(v as InvalidUrl));
 
   @override
-  InvalidUrl<T> get _value => super._value as InvalidUrl<T>;
+  InvalidUrl get _value => super._value as InvalidUrl;
 
   @override
   $Res call({
     Object? url = freezed,
   }) {
-    return _then(InvalidUrl<T>(
+    return _then(InvalidUrl(
       url: url == freezed
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -393,7 +389,7 @@ class _$InvalidUrlCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$InvalidUrl<T> implements InvalidUrl<T> {
+class _$InvalidUrl implements InvalidUrl {
   const _$InvalidUrl({required this.url});
 
   @override
@@ -401,13 +397,13 @@ class _$InvalidUrl<T> implements InvalidUrl<T> {
 
   @override
   String toString() {
-    return 'RequestFailure<$T>.invalidUrl(url: $url)';
+    return 'RequestFailure.invalidUrl(url: $url)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is InvalidUrl<T> &&
+        (other is InvalidUrl &&
             (identical(other.url, url) ||
                 const DeepCollectionEquality().equals(other.url, url)));
   }
@@ -418,8 +414,8 @@ class _$InvalidUrl<T> implements InvalidUrl<T> {
 
   @JsonKey(ignore: true)
   @override
-  $InvalidUrlCopyWith<T, InvalidUrl<T>> get copyWith =>
-      _$InvalidUrlCopyWithImpl<T, InvalidUrl<T>>(this, _$identity);
+  $InvalidUrlCopyWith<InvalidUrl> get copyWith =>
+      _$InvalidUrlCopyWithImpl<InvalidUrl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -450,11 +446,11 @@ class _$InvalidUrl<T> implements InvalidUrl<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(noResponse<T> value) noResponse,
-    required TResult Function(InvalidResponseStatusCode<T> value)
+    required TResult Function(noResponse value) noResponse,
+    required TResult Function(InvalidResponseStatusCode value)
         invalidResponseStatusCode,
-    required TResult Function(InvalidUrl<T> value) invalidUrl,
-    required TResult Function(InvalidRequestBody<T> value) invalidRequestBody,
+    required TResult Function(InvalidUrl value) invalidUrl,
+    required TResult Function(InvalidRequestBody value) invalidRequestBody,
   }) {
     return invalidUrl(this);
   }
@@ -462,11 +458,11 @@ class _$InvalidUrl<T> implements InvalidUrl<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(noResponse<T> value)? noResponse,
-    TResult Function(InvalidResponseStatusCode<T> value)?
+    TResult Function(noResponse value)? noResponse,
+    TResult Function(InvalidResponseStatusCode value)?
         invalidResponseStatusCode,
-    TResult Function(InvalidUrl<T> value)? invalidUrl,
-    TResult Function(InvalidRequestBody<T> value)? invalidRequestBody,
+    TResult Function(InvalidUrl value)? invalidUrl,
+    TResult Function(InvalidRequestBody value)? invalidRequestBody,
     required TResult orElse(),
   }) {
     if (invalidUrl != null) {
@@ -476,39 +472,39 @@ class _$InvalidUrl<T> implements InvalidUrl<T> {
   }
 }
 
-abstract class InvalidUrl<T> implements RequestFailure<T> {
-  const factory InvalidUrl({required DioError url}) = _$InvalidUrl<T>;
+abstract class InvalidUrl implements RequestFailure {
+  const factory InvalidUrl({required DioError url}) = _$InvalidUrl;
 
   DioError get url => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $InvalidUrlCopyWith<T, InvalidUrl<T>> get copyWith =>
+  $InvalidUrlCopyWith<InvalidUrl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $InvalidRequestBodyCopyWith<T, $Res> {
-  factory $InvalidRequestBodyCopyWith(InvalidRequestBody<T> value,
-          $Res Function(InvalidRequestBody<T>) then) =
-      _$InvalidRequestBodyCopyWithImpl<T, $Res>;
+abstract class $InvalidRequestBodyCopyWith<$Res> {
+  factory $InvalidRequestBodyCopyWith(
+          InvalidRequestBody value, $Res Function(InvalidRequestBody) then) =
+      _$InvalidRequestBodyCopyWithImpl<$Res>;
   $Res call({DioError body});
 }
 
 /// @nodoc
-class _$InvalidRequestBodyCopyWithImpl<T, $Res>
-    extends _$RequestFailureCopyWithImpl<T, $Res>
-    implements $InvalidRequestBodyCopyWith<T, $Res> {
+class _$InvalidRequestBodyCopyWithImpl<$Res>
+    extends _$RequestFailureCopyWithImpl<$Res>
+    implements $InvalidRequestBodyCopyWith<$Res> {
   _$InvalidRequestBodyCopyWithImpl(
-      InvalidRequestBody<T> _value, $Res Function(InvalidRequestBody<T>) _then)
-      : super(_value, (v) => _then(v as InvalidRequestBody<T>));
+      InvalidRequestBody _value, $Res Function(InvalidRequestBody) _then)
+      : super(_value, (v) => _then(v as InvalidRequestBody));
 
   @override
-  InvalidRequestBody<T> get _value => super._value as InvalidRequestBody<T>;
+  InvalidRequestBody get _value => super._value as InvalidRequestBody;
 
   @override
   $Res call({
     Object? body = freezed,
   }) {
-    return _then(InvalidRequestBody<T>(
+    return _then(InvalidRequestBody(
       body: body == freezed
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
@@ -519,7 +515,7 @@ class _$InvalidRequestBodyCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$InvalidRequestBody<T> implements InvalidRequestBody<T> {
+class _$InvalidRequestBody implements InvalidRequestBody {
   const _$InvalidRequestBody({required this.body});
 
   @override
@@ -527,13 +523,13 @@ class _$InvalidRequestBody<T> implements InvalidRequestBody<T> {
 
   @override
   String toString() {
-    return 'RequestFailure<$T>.invalidRequestBody(body: $body)';
+    return 'RequestFailure.invalidRequestBody(body: $body)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is InvalidRequestBody<T> &&
+        (other is InvalidRequestBody &&
             (identical(other.body, body) ||
                 const DeepCollectionEquality().equals(other.body, body)));
   }
@@ -544,9 +540,8 @@ class _$InvalidRequestBody<T> implements InvalidRequestBody<T> {
 
   @JsonKey(ignore: true)
   @override
-  $InvalidRequestBodyCopyWith<T, InvalidRequestBody<T>> get copyWith =>
-      _$InvalidRequestBodyCopyWithImpl<T, InvalidRequestBody<T>>(
-          this, _$identity);
+  $InvalidRequestBodyCopyWith<InvalidRequestBody> get copyWith =>
+      _$InvalidRequestBodyCopyWithImpl<InvalidRequestBody>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -577,11 +572,11 @@ class _$InvalidRequestBody<T> implements InvalidRequestBody<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(noResponse<T> value) noResponse,
-    required TResult Function(InvalidResponseStatusCode<T> value)
+    required TResult Function(noResponse value) noResponse,
+    required TResult Function(InvalidResponseStatusCode value)
         invalidResponseStatusCode,
-    required TResult Function(InvalidUrl<T> value) invalidUrl,
-    required TResult Function(InvalidRequestBody<T> value) invalidRequestBody,
+    required TResult Function(InvalidUrl value) invalidUrl,
+    required TResult Function(InvalidRequestBody value) invalidRequestBody,
   }) {
     return invalidRequestBody(this);
   }
@@ -589,11 +584,11 @@ class _$InvalidRequestBody<T> implements InvalidRequestBody<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(noResponse<T> value)? noResponse,
-    TResult Function(InvalidResponseStatusCode<T> value)?
+    TResult Function(noResponse value)? noResponse,
+    TResult Function(InvalidResponseStatusCode value)?
         invalidResponseStatusCode,
-    TResult Function(InvalidUrl<T> value)? invalidUrl,
-    TResult Function(InvalidRequestBody<T> value)? invalidRequestBody,
+    TResult Function(InvalidUrl value)? invalidUrl,
+    TResult Function(InvalidRequestBody value)? invalidRequestBody,
     required TResult orElse(),
   }) {
     if (invalidRequestBody != null) {
@@ -603,12 +598,12 @@ class _$InvalidRequestBody<T> implements InvalidRequestBody<T> {
   }
 }
 
-abstract class InvalidRequestBody<T> implements RequestFailure<T> {
+abstract class InvalidRequestBody implements RequestFailure {
   const factory InvalidRequestBody({required DioError body}) =
-      _$InvalidRequestBody<T>;
+      _$InvalidRequestBody;
 
   DioError get body => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $InvalidRequestBodyCopyWith<T, InvalidRequestBody<T>> get copyWith =>
+  $InvalidRequestBodyCopyWith<InvalidRequestBody> get copyWith =>
       throw _privateConstructorUsedError;
 }

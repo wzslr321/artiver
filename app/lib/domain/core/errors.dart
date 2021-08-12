@@ -20,15 +20,3 @@ class UnexpectedValueError extends Error {
         'Encountered a ValueFailure at an unrecoverable point. Terminating. Failure was: $valueFailure');
   }
 }
-
-class RequestError extends Error {
-  RequestError(this.failedRequest);
-
-  final RequestFailure failedRequest;
-
-  @override
-  String toString() {
-    return Error.safeToString(
-        'Failed to perform request. Error was: $failedRequest');
-  }
-}

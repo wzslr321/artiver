@@ -6,27 +6,24 @@ import 'errors.dart';
 import 'request_failure.dart';
 
 @immutable
-abstract class Requester {
-  const Requester();
-
-  String get url;
-
-  Future<Either<RequestError, Response<String>>> sendRequest() async {
+class Requester {
+  static Future<Either<RequestFailure, Response<String>>> sendRequest(
+    Future<Either<RequestFailure, Response<String>>> Function() forwardedCall,
+  ) async {
     try {
-      final dio = Dio();
-      final response = await dio.get<String>(url);
-      return right(response);
+      final response = forwardedCall();
+
+      return response;
     } on DioError catch (error) {
       if (error.response != null) {
         final requestFailure =
-            RequestFailure<DioError>.invalidResponseStatusCode(response: error);
+            RequestFailure.invalidResponseStatusCode(response: error);
 
-        return left(RequestError(requestFailure));
+        return left(requestFailure);
       } else {
-        final requestFailure =
-            RequestFailure<DioError>.noResponse(response: error);
+        final requestFailure = RequestFailure.noResponse(response: error);
 
-        return left(RequestError(requestFailure));
+        return left(requestFailure);
       }
     }
   }

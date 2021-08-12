@@ -4,20 +4,20 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'request_failure.freezed.dart';
 
 @freezed
-class RequestFailure<T> with _$RequestFailure<T> {
+class RequestFailure with _$RequestFailure {
   const factory RequestFailure.noResponse({
     required DioError response,
-  }) = noResponse<T>;
+  }) = noResponse;
 
   const factory RequestFailure.invalidResponseStatusCode({
     required DioError response,
-  }) = InvalidResponseStatusCode<T>;
+  }) = InvalidResponseStatusCode;
 
   const factory RequestFailure.invalidUrl({
     required DioError url,
-  }) = InvalidUrl<T>;
+  }) = InvalidUrl;
 
   const factory RequestFailure.invalidRequestBody({
     required DioError body,
-  }) = InvalidRequestBody<T>;
+  }) = InvalidRequestBody;
 }
