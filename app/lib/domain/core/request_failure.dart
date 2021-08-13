@@ -6,7 +6,7 @@ part 'request_failure.freezed.dart';
 @freezed
 class RequestFailure with _$RequestFailure {
   const factory RequestFailure.noResponse({
-    required DioError response,
+    required DioError error,
   }) = noResponse;
 
   const factory RequestFailure.invalidResponseStatusCode({

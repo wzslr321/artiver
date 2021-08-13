@@ -20,7 +20,7 @@ class Requester {
 
         return left(requestFailure);
       } else {
-        final requestFailure = RequestFailure.noResponse(response: error);
+        final requestFailure = RequestFailure.noResponse(error: error);
 
         return left(requestFailure);
       }

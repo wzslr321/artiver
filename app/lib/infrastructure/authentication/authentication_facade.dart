@@ -1,9 +1,9 @@
-import 'package:flutter/services.dart';
 import 'package:fpdart/fpdart.dart';
 
 import '../../domain/authentication/authentication_facade_interface.dart';
 import '../../domain/authentication/authentication_failure.dart';
 import '../../domain/authentication/value_objects.dart';
+import '../../domain/core/exceptions.dart';
 import '../../domain/core/requester.dart';
 import 'authentication_requester_facade.dart';
 
@@ -17,7 +17,6 @@ import 'authentication_requester_facade.dart';
 /// This class implements [AuthenticationFacadeInterface] located in /app/lib/domain/authentication directory.
 /// It makes it possible to override revealed methods and code their functionality.
 class AuthenticationFacade implements AuthenticationFacadeInterface {
-
   @override
   Future<Either<AuthenticationFailure, Unit>> registerWithEmailAndPassword({
     required EmailAddress email,
@@ -35,9 +34,11 @@ class AuthenticationFacade implements AuthenticationFacadeInterface {
       );
 
       return right(unit);
-    } on PlatformException catch (error) {
+    } on AuthenticationException catch (error) {
       if (error.code == 'email-already-in-use') {
         return left(const AuthenticationFailure.emailAlreadyInUse());
+      } else if (error.code == 'username-already-in-use') {
+        return left(const AuthenticationFailure.usernameAlreadyInUse());
       } else {
         return left(const AuthenticationFailure.serverError());
       }

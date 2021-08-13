@@ -16,9 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$RequestFailureTearOff {
   const _$RequestFailureTearOff();
 
-  noResponse noResponse({required DioError response}) {
+  noResponse noResponse({required DioError error}) {
     return noResponse(
-      response: response,
+      error: error,
     );
   }
 
@@ -49,7 +49,7 @@ const $RequestFailure = _$RequestFailureTearOff();
 mixin _$RequestFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError response) noResponse,
+    required TResult Function(DioError error) noResponse,
     required TResult Function(DioError response) invalidResponseStatusCode,
     required TResult Function(DioError url) invalidUrl,
     required TResult Function(DioError body) invalidRequestBody,
@@ -57,7 +57,7 @@ mixin _$RequestFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError response)? noResponse,
+    TResult Function(DioError error)? noResponse,
     TResult Function(DioError response)? invalidResponseStatusCode,
     TResult Function(DioError url)? invalidUrl,
     TResult Function(DioError body)? invalidRequestBody,
@@ -107,7 +107,7 @@ abstract class $noResponseCopyWith<$Res> {
   factory $noResponseCopyWith(
           noResponse value, $Res Function(noResponse) then) =
       _$noResponseCopyWithImpl<$Res>;
-  $Res call({DioError response});
+  $Res call({DioError error});
 }
 
 /// @nodoc
@@ -121,12 +121,12 @@ class _$noResponseCopyWithImpl<$Res> extends _$RequestFailureCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? response = freezed,
+    Object? error = freezed,
   }) {
     return _then(noResponse(
-      response: response == freezed
-          ? _value.response
-          : response // ignore: cast_nullable_to_non_nullable
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
               as DioError,
     ));
   }
@@ -135,28 +135,27 @@ class _$noResponseCopyWithImpl<$Res> extends _$RequestFailureCopyWithImpl<$Res>
 /// @nodoc
 
 class _$noResponse implements noResponse {
-  const _$noResponse({required this.response});
+  const _$noResponse({required this.error});
 
   @override
-  final DioError response;
+  final DioError error;
 
   @override
   String toString() {
-    return 'RequestFailure.noResponse(response: $response)';
+    return 'RequestFailure.noResponse(error: $error)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is noResponse &&
-            (identical(other.response, response) ||
-                const DeepCollectionEquality()
-                    .equals(other.response, response)));
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(response);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
 
   @JsonKey(ignore: true)
   @override
@@ -166,25 +165,25 @@ class _$noResponse implements noResponse {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError response) noResponse,
+    required TResult Function(DioError error) noResponse,
     required TResult Function(DioError response) invalidResponseStatusCode,
     required TResult Function(DioError url) invalidUrl,
     required TResult Function(DioError body) invalidRequestBody,
   }) {
-    return noResponse(response);
+    return noResponse(error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError response)? noResponse,
+    TResult Function(DioError error)? noResponse,
     TResult Function(DioError response)? invalidResponseStatusCode,
     TResult Function(DioError url)? invalidUrl,
     TResult Function(DioError body)? invalidRequestBody,
     required TResult orElse(),
   }) {
     if (noResponse != null) {
-      return noResponse(response);
+      return noResponse(error);
     }
     return orElse();
   }
@@ -219,9 +218,9 @@ class _$noResponse implements noResponse {
 }
 
 abstract class noResponse implements RequestFailure {
-  const factory noResponse({required DioError response}) = _$noResponse;
+  const factory noResponse({required DioError error}) = _$noResponse;
 
-  DioError get response => throw _privateConstructorUsedError;
+  DioError get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $noResponseCopyWith<noResponse> get copyWith =>
       throw _privateConstructorUsedError;
@@ -295,7 +294,7 @@ class _$InvalidResponseStatusCode implements InvalidResponseStatusCode {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError response) noResponse,
+    required TResult Function(DioError error) noResponse,
     required TResult Function(DioError response) invalidResponseStatusCode,
     required TResult Function(DioError url) invalidUrl,
     required TResult Function(DioError body) invalidRequestBody,
@@ -306,7 +305,7 @@ class _$InvalidResponseStatusCode implements InvalidResponseStatusCode {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError response)? noResponse,
+    TResult Function(DioError error)? noResponse,
     TResult Function(DioError response)? invalidResponseStatusCode,
     TResult Function(DioError url)? invalidUrl,
     TResult Function(DioError body)? invalidRequestBody,
@@ -420,7 +419,7 @@ class _$InvalidUrl implements InvalidUrl {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError response) noResponse,
+    required TResult Function(DioError error) noResponse,
     required TResult Function(DioError response) invalidResponseStatusCode,
     required TResult Function(DioError url) invalidUrl,
     required TResult Function(DioError body) invalidRequestBody,
@@ -431,7 +430,7 @@ class _$InvalidUrl implements InvalidUrl {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError response)? noResponse,
+    TResult Function(DioError error)? noResponse,
     TResult Function(DioError response)? invalidResponseStatusCode,
     TResult Function(DioError url)? invalidUrl,
     TResult Function(DioError body)? invalidRequestBody,
@@ -546,7 +545,7 @@ class _$InvalidRequestBody implements InvalidRequestBody {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError response) noResponse,
+    required TResult Function(DioError error) noResponse,
     required TResult Function(DioError response) invalidResponseStatusCode,
     required TResult Function(DioError url) invalidUrl,
     required TResult Function(DioError body) invalidRequestBody,
@@ -557,7 +556,7 @@ class _$InvalidRequestBody implements InvalidRequestBody {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError response)? noResponse,
+    TResult Function(DioError error)? noResponse,
     TResult Function(DioError response)? invalidResponseStatusCode,
     TResult Function(DioError url)? invalidUrl,
     TResult Function(DioError body)? invalidRequestBody,
