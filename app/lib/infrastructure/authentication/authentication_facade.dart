@@ -3,8 +3,8 @@ import 'package:fpdart/fpdart.dart';
 import '../../domain/authentication/authentication_facade_interface.dart';
 import '../../domain/authentication/authentication_failure.dart';
 import '../../domain/authentication/value_objects.dart';
-import '../../domain/core/exceptions.dart';
 import '../../domain/core/requester.dart';
+import '../core/exceptions.dart';
 import 'authentication_requester_facade.dart';
 
 /// AuthenticationFacade responsible for implementing functionality of authorization methods.

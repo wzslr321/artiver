@@ -1,9 +1,10 @@
-import 'package:artiver/domain/core/exceptions.dart';
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 
 import '../../domain/authentication/authentication_requester_facade_interface.dart';
 import '../../domain/core/request_failure.dart';
+import '../core/constants/exceptions_codes.dart';
+import '../core/exceptions.dart';
 
 class AuthenticationRequesterFacade
     implements AuthenticationRequesterFacadeInterface {
@@ -13,7 +14,7 @@ class AuthenticationRequesterFacade
     required String password,
   }) {
     // it will be used differently, chill, it is only a test 👨‍💻
-    throw AuthenticationException('email-already-in-use');
+    throw AuthenticationException(emailAlreadyInUseECode);
   }
 
   @override
@@ -21,7 +22,7 @@ class AuthenticationRequesterFacade
     required String username,
   }) {
     // Those strings probably should be splitted into a consts in different file...
-    throw AuthenticationException('username-already-in-use');
+    throw AuthenticationException(usernameAlreadyInUseECode);
   }
 
   @override
