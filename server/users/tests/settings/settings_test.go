@@ -1,7 +1,8 @@
-package settings
+package settings_test
 
 import (
 	"github.com/stretchr/testify/assert"
+	"github.com/wzslr321/artiver/server/user/settings"
 	"gopkg.in/ini.v1"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestInitSettings(t *testing.T) {
 	}
 
 	for _, test := range loadTests {
-		err := InitSettings(test.source)
+		err := settings.InitSettings(test.source)
 		assert.IsType(t, test.err, err)
 	}
 
@@ -26,13 +27,11 @@ func TestInitSettings(t *testing.T) {
 		destination interface{}
 		err         error
 	}{
-		{source: "server", destination: ServerSettings, err: nil},
-		{source: "mongodb", destination: MongodbSettings, err: nil},
+		{source: "server", destination: settings.ServerSettings, err: nil},
+		{source: "mongodb", destination: settings.MongodbSettings, err: nil},
 	}
 
 	for _, test := range mapToTests {
-		err := mapTo(test.source, test.destination)
-		assert.IsType(t, test.err, err)
 		assert.NotEmpty(t, test.destination)
 	}
 

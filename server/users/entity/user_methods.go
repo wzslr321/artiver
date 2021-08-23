@@ -16,7 +16,7 @@ func (m *UserCollection) NewUser(email, username, password string) (*User, error
 	if err != nil {
 		return nil, err
 	}
-	
+
 	id := ID(uuid)
 
 	pwd, err := pkg.GeneratePasswordHash(password)
@@ -32,7 +32,7 @@ func (m *UserCollection) NewUser(email, username, password string) (*User, error
 		CreatedAt: time.Now(),
 	}
 
-	err = validate(email, username, password)
+	err = Validate(email, username, password)
 	if err != nil {
 		return nil, err
 	}

@@ -6,12 +6,12 @@ import (
 	"unicode"
 )
 
-func validate(email, username, password string) error {
+func Validate(email, username, password string) error {
 
 	var (
-		isEmailValid    = validateEmail(email)
-		isUsernameValid = validateUsername(username)
-		isPasswordValid = validatePassword(password)
+		isEmailValid    = ValidateEmail(email)
+		isUsernameValid = ValidateUsername(username)
+		isPasswordValid = ValidatePassword(password)
 	)
 
 	if !isEmailValid || !isUsernameValid || !isPasswordValid {
@@ -27,7 +27,7 @@ func validate(email, username, password string) error {
 	return nil
 }
 
-func validateUsername(username string) bool {
+func ValidateUsername(username string) bool {
 
 	var (
 		hasMinLen      bool
@@ -55,7 +55,7 @@ func validateUsername(username string) bool {
 	return isValid
 }
 
-func validatePassword(password string) bool {
+func ValidatePassword(password string) bool {
 	// Minimum 8 and maximum 16 characters, at least one uppercase letter, one lowercase letter, one number and one special character.
 
 	// Because Go's regex doesn't support backtracking, it requires custom implementation.
@@ -110,7 +110,7 @@ func validatePassword(password string) bool {
 	return isValid
 }
 
-func validateEmail(email string) bool {
+func ValidateEmail(email string) bool {
 	var (
 		hasMinLen       bool
 		hasAtChar       bool
