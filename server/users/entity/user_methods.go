@@ -19,7 +19,8 @@ func (m *UserCollection) NewUser(email, username, password string) (*User, error
 
 	id := ID(uuid)
 
-	pwd, err := pkg.GeneratePasswordHash(password)
+	var pwd string
+	pwd, err = pkg.GeneratePasswordHash(password)
 	if err != nil {
 		return nil, err
 	}
