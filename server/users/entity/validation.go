@@ -6,7 +6,7 @@ import (
 	"unicode"
 )
 
-func Validate(email, username, password string) error {
+func Validate(email, username, password string) (bool, error) {
 
 	var (
 		isEmailValid, _    = ValidateEmail(email)
@@ -21,10 +21,10 @@ func Validate(email, username, password string) error {
 			isPasswordValid: %v`,
 			isEmailValid, isUsernameValid, isPasswordValid,
 		)
-		return ValidationError
+		return false, ValidationError
 	}
 
-	return nil
+	return true, nil
 }
 
 func ValidateUsername(username string) (bool, error) {
@@ -37,7 +37,9 @@ func ValidateUsername(username string) (bool, error) {
 
 	if len(username) >= 3 {
 		hasMinLen = true
-	} else if len(username) > 16 {
+	}
+
+	if len(username) > 16 {
 		hasExceededLen = true
 	}
 
@@ -46,9 +48,10 @@ func ValidateUsername(username string) (bool, error) {
 	if !isValid {
 		log.Printf(`
 			Username is not valid: 
+			username: %v
 			hasMinLen: %v 
 			hasExceededLen: %v`,
-			hasMinLen, hasExceededLen,
+			username, hasMinLen, hasExceededLen,
 		)
 
 		return false, ValidationError
@@ -73,9 +76,12 @@ func ValidatePassword(password string) (bool, error) {
 		isValid        bool
 	)
 
-	if len(password) >= 8 && len(password) <= 16 {
+	if len(password) >= 8 {
 		hasMinLen = true
-		hasExceededLen = false
+	}
+
+	if len(password) > 16 {
+		hasExceededLen = true
 	}
 
 	for _, char := range password {

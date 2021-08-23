@@ -32,7 +32,7 @@ func (m *UserCollection) NewUser(email, username, password string) (*User, error
 		CreatedAt: time.Now(),
 	}
 
-	err = Validate(email, username, password)
+	_, err = Validate(email, username, password)
 	if err != nil {
 		return nil, err
 	}
