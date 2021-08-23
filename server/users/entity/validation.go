@@ -9,9 +9,9 @@ import (
 func Validate(email, username, password string) error {
 
 	var (
-		isEmailValid    = ValidateEmail(email)
-		isUsernameValid = ValidateUsername(username)
-		isPasswordValid = ValidatePassword(password)
+		isEmailValid, _    = ValidateEmail(email)
+		isUsernameValid, _ = ValidateUsername(username)
+		isPasswordValid, _ = ValidatePassword(password)
 	)
 
 	if !isEmailValid || !isUsernameValid || !isPasswordValid {
@@ -27,7 +27,7 @@ func Validate(email, username, password string) error {
 	return nil
 }
 
-func ValidateUsername(username string) bool {
+func ValidateUsername(username string) (bool, error) {
 
 	var (
 		hasMinLen      bool
@@ -50,12 +50,14 @@ func ValidateUsername(username string) bool {
 			hasExceededLen: %v`,
 			hasMinLen, hasExceededLen,
 		)
+
+		return false, ValidationError
 	}
 
-	return isValid
+	return isValid, nil
 }
 
-func ValidatePassword(password string) bool {
+func ValidatePassword(password string) (bool, error) {
 	// Minimum 8 and maximum 16 characters, at least one uppercase letter, one lowercase letter, one number and one special character.
 
 	// Because Go's regex doesn't support backtracking, it requires custom implementation.
@@ -71,7 +73,7 @@ func ValidatePassword(password string) bool {
 		isValid        bool
 	)
 
-	if len(password) > 8 && len(password) <= 16 {
+	if len(password) >= 8 && len(password) <= 16 {
 		hasMinLen = true
 		hasExceededLen = false
 	}
@@ -105,12 +107,13 @@ func ValidatePassword(password string) bool {
 			hasMinLen, hasUppercase, hasLowercase, hasNumber,
 			hasSpecialChar, hasExceededLen,
 		)
+		return false, ValidationError
 	}
 
-	return isValid
+	return isValid, nil
 }
 
-func ValidateEmail(email string) bool {
+func ValidateEmail(email string) (bool, error) {
 	var (
 		hasMinLen       bool
 		hasAtChar       bool
@@ -138,7 +141,8 @@ func ValidateEmail(email string) bool {
 			hasAtCharAsLast: %v`,
 			hasMinLen, hasAtChar, hasAtCharAsLast,
 		)
+		return false, ValidationError
 	}
 
-	return isValid
+	return isValid, nil
 }
