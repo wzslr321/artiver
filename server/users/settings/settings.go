@@ -28,7 +28,8 @@ var MongodbSettings = &Mongodb{}
 func InitSettings(source string) error {
 	var err error
 
-	cfg, err = ini.Load(conf.GetRootDir() + source)
+	dir, _ := conf.GetConfDir()
+	cfg, err = ini.Load(dir + source)
 	if err != nil {
 		log.Fatalf("settings setup, failed to parse 'conf/conf_dev.ini' : %v", err)
 		return err
