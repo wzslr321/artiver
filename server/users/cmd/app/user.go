@@ -25,6 +25,8 @@ func (app *application) createUser(ctx *gin.Context) {
 	fmt.Println(json.Username)
 	fmt.Println(json.Password)
 	fmt.Println("=================")
+	fmt.Println(app)
+	fmt.Println("=================")
 
 	user, err := app.users.NewUser(json.Email, json.Username, json.Password)
 	if err != nil {
