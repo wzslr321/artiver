@@ -1,9 +1,10 @@
 FROM golang:alpine
 
-WORKDIR /docs/server
+
+WORKDIR /go/src/users
 
 RUN go get golang.org/x/tools/cmd/godoc
 
 COPY . .
 
-CMD ["godoc", "-http=:8080"]
+CMD ["godoc", "-http=:8082"]

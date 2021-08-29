@@ -33,9 +33,12 @@ func (m *UserCollection) NewUser(email, username, password string) (*User, error
 		CreatedAt: time.Now(),
 	}
 
-	_, err = Validate(email, username, password)
+	var isOK bool
+	isOK, err = Validate(email, username, password)
 	if err != nil {
 		return nil, err
+	} else if isOK != true {
+		return nil, ValidationError
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)

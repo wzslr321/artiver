@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-
+// InitRouter is test for godoc.
 func (app *application) InitRouter() *gin.Engine {
 	r := gin.New()
 
