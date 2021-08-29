@@ -27,9 +27,9 @@ func (m *UserCollection) NewUser(email, username, password string) (*User, error
 
 	u := &User{
 		ID:        id,
-		Email:     email,
-		Username:  username,
-		Password:  pwd,
+		Email:     &email,
+		Username:  &username,
+		Password:  &pwd,
 		CreatedAt: time.Now(),
 	}
 
@@ -160,4 +160,25 @@ func (m *UserCollection) UpdateUser(user *presenter.User) bson.M {
 	}
 
 	return updatedUser
+}
+
+func (m *UserCollection) LoginUser(email, password string) (*User, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	var foundUser *User
+
+	if err := m.C.FindOne(ctx, bson.M{"email": email}).Decode(&foundUser); err != nil {
+		return nil, err
+	}
+
+	isPasswordValid, err := pkg.VerifyPassword(password, *foundUser.Password)
+	if !isPasswordValid {
+		return nil, nil
+	} else if err != nil {
+		return nil, nil
+	}
+
+	return foundUser, nil
+
 }

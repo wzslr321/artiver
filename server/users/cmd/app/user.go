@@ -6,6 +6,8 @@ import (
 	"net/http"
 )
 
+// ⚠️ Naming definitely requires major changes ⚠️
+
 func (app *application) createUser(ctx *gin.Context) {
 
 	var json presenter.Register
@@ -75,4 +77,21 @@ func (app *application) updateUser(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"respond": res,
 	})
+}
+
+func (app *application) signIn(ctx *gin.Context) {
+	var json presenter.User
+	if err := ctx.ShouldBindJSON(&json); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	user, err := app.users.LoginUser(json.Email, json.Password)
+	if err != nil {
+		return
+	}
+
+	token, refreshToken, _ :=
 }

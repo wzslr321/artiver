@@ -3,7 +3,6 @@ module github.com/wzslr321/artiver/server/user
 go 1.16
 
 require (
-	github.com/gin-gonic/gin v1.5.0 // indirect
 	github.com/rs/cors v1.8.0 // indirect
 	github.com/stretchr/objx v0.3.0 // indirect
 	github.com/stretchr/testify v1.7.0 // indirect
