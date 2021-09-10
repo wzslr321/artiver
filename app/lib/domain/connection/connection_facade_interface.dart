@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 
 import './connection_failure.dart';
 

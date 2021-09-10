@@ -1,3 +1,4 @@
 {
-    "helloWorld": "Witaj świecie!"
+  "connection_established": "Odzyskano połączenie!",
+  "connection_lost": "Nie znaleziono połączenia z internetem..."
 }
