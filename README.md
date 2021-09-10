@@ -13,6 +13,15 @@
 
 ---
   
+  
+<h3 align="center"> 
+  <i> Unfortunetely due to my braking change of path, I am no longer coding in Flutter and Golang, at least not untill 2023. Hence I am not able to actively develop this project no more. <br> <br> <b> Big shotout to everyone who participated in the development process. </b> </i> <br> 
+
+  <a href="https://github.com/akyunus"> @akyunus </a> <a href="https://github.com/kkuba-git">  @kkuba-git </a> <a href="https://github.com/gauravmishra-17"> @gauravmishra-17 </a> <a href="https://github.com/sagar-monga"> @sagar-monga  </a>
+  </h4>
+  
+---
+  
 <br>
   
   <h2 align="center"> What is ArTiver? </h2>
@@ -38,7 +47,7 @@ Ultimately, the project is going to be available on all platforms, taking advant
 Real cross-platform experience for developers!
 
 <br>  
-  
+
 ## Structure
 
 | Codebase              |        Description        |
