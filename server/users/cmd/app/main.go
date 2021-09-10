@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	cors "github.com/rs/cors/wrapper/gin"
 	"github.com/wzslr321/artiver/server/user/entity"
 	"github.com/wzslr321/artiver/server/user/settings"
@@ -16,22 +17,21 @@ import (
 	"time"
 )
 
-
 type application struct {
 	users *entity.UserCollection
 }
 
 var app *application
 
-func init() {
-	settings.InitSettings()
-}
+const devConfig = "/conf/conf_dev.ini"
 
+func init() {
+	_ = settings.InitSettings(devConfig)
+}
 
 func main() {
 
 	oc := options.Client().ApplyURI(settings.MongodbSettings.Uri)
-
 
 	client, err := mongo.NewClient(oc)
 	if err != nil {
@@ -54,7 +54,6 @@ func main() {
 
 	log.Println("Successfully connected to the database!")
 
-
 	app = &application{
 		users: &entity.UserCollection{
 			C: client.Database("artiver").Collection("users"),
@@ -66,8 +65,10 @@ func main() {
 	readTimeout := settings.ServerSettings.ReadTimeout
 	writeTimeout := settings.ServerSettings.WriteTimeout
 	maxHeaderBytes := settings.ServerSettings.MaxHeaderBytes
+	runMode := settings.ServerSettings.RunMode
 
 	router.Use(cors.Default())
+	gin.SetMode(runMode)
 
 	server := &http.Server{
 		Addr:           address,
@@ -88,7 +89,6 @@ func main() {
 	}()
 
 	quit := make(chan os.Signal)
-
 
 	signal.Notify(make(chan os.Signal, 1), syscall.SIGINT, syscall.SIGTERM)
 	<-quit

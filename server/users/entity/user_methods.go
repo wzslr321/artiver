@@ -12,25 +12,33 @@ import (
 )
 
 func (m *UserCollection) NewUser(email, username, password string) (*User, error) {
-	uuid := pkg.GenerateID()
+	uuid, err := pkg.GenerateID()
+	if err != nil {
+		return nil, err
+	}
+
 	id := ID(uuid)
 
-	pwd, err := pkg.GeneratePasswordHash(password)
+	var pwd string
+	pwd, err = pkg.GeneratePasswordHash(password)
 	if err != nil {
 		return nil, err
 	}
 
 	u := &User{
 		ID:        id,
-		Email:     email,
-		Username:  username,
-		Password:  pwd,
+		Email:     &email,
+		Username:  &username,
+		Password:  &pwd,
 		CreatedAt: time.Now(),
 	}
 
-	err = validate(email, username, password)
+	var isOK bool
+	isOK, err = Validate(email, username, password)
 	if err != nil {
 		return nil, err
+	} else if isOK != true {
+		return nil, ValidationError
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
@@ -152,4 +160,25 @@ func (m *UserCollection) UpdateUser(user *presenter.User) bson.M {
 	}
 
 	return updatedUser
+}
+
+func (m *UserCollection) LoginUser(email, password string) (*User, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	var foundUser *User
+
+	if err := m.C.FindOne(ctx, bson.M{"email": email}).Decode(&foundUser); err != nil {
+		return nil, err
+	}
+
+	isPasswordValid, err := pkg.VerifyPassword(password, *foundUser.Password)
+	if !isPasswordValid {
+		return nil, nil
+	} else if err != nil {
+		return nil, nil
+	}
+
+	return foundUser, nil
+
 }

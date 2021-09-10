@@ -5,7 +5,7 @@ import (
 	cors "github.com/rs/cors/wrapper/gin"
 )
 
-
+// InitRouter is test for godoc.
 func (app *application) InitRouter() *gin.Engine {
 	r := gin.New()
 
