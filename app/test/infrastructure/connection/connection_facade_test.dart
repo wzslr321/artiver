@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 import 'package:mockito/annotations.dart';

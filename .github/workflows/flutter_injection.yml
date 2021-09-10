@@ -1,0 +1,15 @@
+name: flutter_injection
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9.6'
+      - name: Run Python script
+        working-directory: ./app
+        run: python check_injection.py

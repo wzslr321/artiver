@@ -25,23 +25,29 @@ type Mongodb struct {
 
 var MongodbSettings = &Mongodb{}
 
-func InitSettings() {
+func InitSettings(source string) error {
 	var err error
 
-	cfg, err = ini.Load(conf.GetRootDir() + "/conf/conf_dev.ini")
+	dir, _ := conf.GetConfDir()
+	cfg, err = ini.Load(dir + source)
 	if err != nil {
 		log.Fatalf("settings setup, failed to parse 'conf/conf_dev.ini' : %v", err)
+		return err
 	}
 
-	mapTo("server", ServerSettings)
-	mapTo("mongodb", MongodbSettings)
+	_ = mapTo("server", ServerSettings)
+	_ = mapTo("mongodb", MongodbSettings)
 	ServerSettings.ReadTimeout = ServerSettings.ReadTimeout * time.Second
 	ServerSettings.WriteTimeout = ServerSettings.WriteTimeout * time.Second
+
+	return nil
 }
 
-func mapTo(section string, v interface{}) {
+func mapTo(section string, v interface{}) error {
 	err := cfg.Section(section).MapTo(v)
 	if err != nil {
 		log.Fatalf("Error while mapping to config or section: %v, \n %v", section, err)
+		return err
 	}
+	return nil
 }
