@@ -88,10 +88,5 @@ func (app *application) signIn(ctx *gin.Context) {
 		return
 	}
 
-	user, err := app.users.LoginUser(json.Email, json.Password)
-	if err != nil {
-		return
-	}
-
-	token, refreshToken, _ :=
+	_, _= app.users.LoginUser(json.Email, json.Password)
 }
