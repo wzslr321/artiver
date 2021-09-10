@@ -35,8 +35,8 @@ func InitSettings(source string) error {
 		return err
 	}
 
-	err = mapTo("server", ServerSettings)
-	err = mapTo("mongodb", MongodbSettings)
+	_ = mapTo("server", ServerSettings)
+	_ = mapTo("mongodb", MongodbSettings)
 	ServerSettings.ReadTimeout = ServerSettings.ReadTimeout * time.Second
 	ServerSettings.WriteTimeout = ServerSettings.WriteTimeout * time.Second
 

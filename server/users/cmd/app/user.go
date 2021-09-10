@@ -34,7 +34,6 @@ func (app *application) createUser(ctx *gin.Context) {
 		"user":    user,
 	})
 
-	return
 }
 
 func (app *application) getUserByUsername(ctx *gin.Context) {

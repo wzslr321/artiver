@@ -18,6 +18,7 @@ func (app *application) InitRouter() *gin.Engine {
 		user.GET("/:username", app.getUserByUsername)
 		user.PUT("/", app.updateUser)
 		user.DELETE("/", app.deleteUserById)
+		user.POST("/sign", app.signIn)
 	}
 
 	return r

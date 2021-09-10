@@ -37,7 +37,7 @@ func (m *UserCollection) NewUser(email, username, password string) (*User, error
 	isOK, err = Validate(email, username, password)
 	if err != nil {
 		return nil, err
-	} else if isOK != true {
+	} else if !isOK  {
 		return nil, ValidationError
 	}
 
